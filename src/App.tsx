@@ -24,31 +24,31 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen antialiased flex flex-col relative overflow-hidden" style={{ backgroundColor: '#0A1931', color: '#F6FAFD' }}>
+    <div className="min-h-screen antialiased flex flex-col relative overflow-hidden bg-[#0A1931] text-[#F6FAFD]">
 
-      {/* ── Global Background Blob Ornaments ── */}
+      {/* ── Global Background Ambient Ornaments ── */}
       <div
         className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
         aria-hidden="true"
       >
-        {/* Top-left blob */}
+        {/* Top-left soft cyan-navy blob */}
         <div
-          className="absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full animate-blob"
-          style={{ background: 'radial-gradient(circle, rgba(26,61,99,0.5) 0%, transparent 70%)', filter: 'blur(60px)' }}
+          className="absolute -top-32 -left-32 w-[550px] h-[550px] rounded-full animate-blob opacity-40"
+          style={{ background: 'radial-gradient(circle, rgba(56,189,248,0.2) 0%, rgba(26,61,99,0.5) 50%, transparent 70%)', filter: 'blur(70px)' }}
         />
-        {/* Bottom-right blob */}
+        {/* Bottom-right soft ocean blob */}
         <div
-          className="absolute -bottom-32 -right-32 w-[600px] h-[600px] rounded-full animate-blob"
-          style={{ background: 'radial-gradient(circle, rgba(26,61,99,0.45) 0%, transparent 70%)', filter: 'blur(80px)', animationDelay: '4s' }}
+          className="absolute -bottom-32 -right-32 w-[650px] h-[650px] rounded-full animate-blob opacity-35"
+          style={{ background: 'radial-gradient(circle, rgba(74,127,167,0.35) 0%, rgba(15,35,60,0.5) 50%, transparent 70%)', filter: 'blur(80px)', animationDelay: '4s' }}
         />
-        {/* Center accent blob */}
+        {/* Center ambient glow */}
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full opacity-20 animate-blob"
-          style={{ background: 'radial-gradient(ellipse, rgba(74,127,167,0.15) 0%, transparent 70%)', filter: 'blur(80px)', animationDelay: '2s' }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] rounded-full opacity-25 animate-blob"
+          style={{ background: 'radial-gradient(ellipse, rgba(96,165,250,0.18) 0%, transparent 70%)', filter: 'blur(90px)', animationDelay: '2s' }}
         />
       </div>
 
-      {/* ── Navigation Bar ── */}
+      {/* ── Navigation Bar with Scroll Progress ── */}
       <Navbar />
 
       {/* ── Main Content ── */}
@@ -67,8 +67,7 @@ export default function App() {
         <button
           type="button"
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-40 p-3.5 rounded-full text-white shadow-lg hover:scale-110 active:scale-95 cursor-pointer animate-fadeIn transition-all"
-          style={{ backgroundColor: '#4A7FA7', boxShadow: '0 4px 20px rgba(74,127,167,0.4)' }}
+          className="fixed bottom-7 right-7 z-40 p-4 rounded-2xl text-white shadow-[0_8px_25px_rgba(74,127,167,0.5)] hover:scale-110 active:scale-95 cursor-pointer animate-fadeIn transition-all duration-300 bg-gradient-to-r from-[#4A7FA7] to-[#2563EB] border border-white/20 backdrop-blur-md"
           aria-label="Kembali ke atas"
           title="Kembali ke atas"
         >

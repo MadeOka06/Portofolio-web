@@ -1,114 +1,86 @@
 import { IconCode, IconSmartphone, IconDatabase, IconWrench } from '../common/Icons';
 import { skillsData } from '../../data/portfolioData';
+import Reveal from '../common/Reveal';
 
 export default function Skills() {
   const renderIcon = (iconName: string) => {
     const cls = "w-6 h-6";
     switch (iconName) {
-      case 'code':       return <IconCode className={cls} style={{ color: '#4A7FA7' }} />;
-      case 'smartphone': return <IconSmartphone className={cls} style={{ color: '#4A7FA7' }} />;
-      case 'database':   return <IconDatabase className={cls} style={{ color: '#4A7FA7' }} />;
+      case 'code':       return <IconCode className={cls} style={{ color: '#60A5FA' }} />;
+      case 'smartphone': return <IconSmartphone className={cls} style={{ color: '#60A5FA' }} />;
+      case 'database':   return <IconDatabase className={cls} style={{ color: '#60A5FA' }} />;
       case 'wrench':
-      default:           return <IconWrench className={cls} style={{ color: '#4A7FA7' }} />;
+      default:           return <IconWrench className={cls} style={{ color: '#60A5FA' }} />;
     }
   };
 
   return (
     <section
       id="keahlian"
-      className="py-20 md:py-28"
-      style={{ borderTop: '1px solid rgba(74,127,167,0.15)', borderBottom: '1px solid rgba(74,127,167,0.15)' }}
+      className="py-20 md:py-28 relative"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span
-            className="text-xs sm:text-sm font-semibold uppercase tracking-wider px-3 py-1 rounded-full"
-            style={{
-              color: '#4A7FA7',
-              backgroundColor: 'rgba(74, 127, 167, 0.12)',
-              border: '1px solid rgba(74, 127, 167, 0.3)',
-            }}
-          >
-            Kemampuan Teknis
-          </span>
-          <h2
-            className="text-3xl sm:text-4xl font-extrabold mt-3 mb-4 tracking-tight"
-            style={{ color: '#F6FAFD' }}
-          >
-            Keahlian &amp; Tech Stack
-          </h2>
-          <p className="text-base sm:text-lg" style={{ color: '#B3CFE5' }}>
-            Kombinasi teknologi yang telah saya kuasai dan terapkan dalam berbagai proyek perkuliahan, organisasi, dan eksplorasi mandiri.
-          </p>
+          <Reveal animation="fade-down">
+            <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full bg-[#4A7FA7]/15 border border-[#4A7FA7]/30 text-[#60A5FA]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA] animate-ping" />
+              Kemampuan Teknis
+            </span>
+          </Reveal>
+
+          <Reveal animation="fade-up" delay={150}>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mt-3 mb-4 tracking-tight text-[#F6FAFD]">
+              Keahlian &amp; Tech Stack
+            </h2>
+            <p className="text-base sm:text-lg text-[#B3CFE5]">
+              Kombinasi teknologi yang telah saya kuasai dan terapkan dalam berbagai proyek perkuliahan, organisasi, dan eksplorasi mandiri.
+            </p>
+          </Reveal>
         </div>
 
         {/* Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-          {skillsData.map((cat) => (
-            <div
+          {skillsData.map((cat, idx) => (
+            <Reveal
               key={cat.id}
-              className={`${cat.colSpan} rounded-2xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 group hover:-translate-y-1`}
-              style={{
-                backgroundColor: 'rgba(26, 61, 99, 0.7)',
-                backdropFilter: 'blur(12px)',
-                WebkitBackdropFilter: 'blur(12px)',
-                border: '1px solid rgba(74, 127, 167, 0.2)',
-                boxShadow: '0 4px 24px rgba(10,25,49,0.3)',
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.border = '1px solid rgba(74, 127, 167, 0.5)';
-                (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 32px rgba(74,127,167,0.15)';
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.border = '1px solid rgba(74, 127, 167, 0.2)';
-                (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 24px rgba(10,25,49,0.3)';
-              }}
+              className={`${cat.colSpan} flex`}
+              animation="fade-up"
+              delay={idx * 120}
             >
-              <div>
-                {/* Icon */}
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform"
-                  style={{
-                    backgroundColor: 'rgba(10, 25, 49, 0.6)',
-                    border: '1px solid rgba(74, 127, 167, 0.3)',
-                  }}
-                >
-                  {renderIcon(cat.iconName)}
+              <div
+                className="w-full rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-400 group hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(74,127,167,0.22)] bg-gradient-to-b from-[#1A3D63]/70 via-[#142f4c]/75 to-[#0b1c31]/85 backdrop-blur-xl border border-[#4A7FA7]/25 hover:border-[#60A5FA]/60"
+              >
+                <div>
+                  {/* Icon with soft circular backdrop */}
+                  <div
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-inner bg-[#0A1931]/70 border border-[#4A7FA7]/30 group-hover:border-[#60A5FA]/50"
+                  >
+                    {renderIcon(cat.iconName)}
+                  </div>
+
+                  <h3 className="text-xl sm:text-2xl font-bold mb-3 text-[#F6FAFD] group-hover:text-sky-300 transition-colors">
+                    {cat.title}
+                  </h3>
+                  <p className="text-sm sm:text-base leading-relaxed mb-6 text-[#B3CFE5]/90">
+                    {cat.description}
+                  </p>
                 </div>
 
-                <h3
-                  className="text-xl font-bold mb-2 transition-colors"
-                  style={{ color: '#F6FAFD' }}
-                >
-                  {cat.title}
-                </h3>
-                <p className="text-sm leading-relaxed mb-6" style={{ color: '#B3CFE5' }}>
-                  {cat.description}
-                </p>
+                {/* Skills Tags */}
+                <div className="flex flex-wrap gap-2 pt-5 border-t border-[#4A7FA7]/20">
+                  {cat.skills.map((skill, sIdx) => (
+                    <span
+                      key={sIdx}
+                      className="text-xs sm:text-sm font-medium px-3.5 py-1.5 rounded-full transition-all duration-300 hover:scale-105 bg-[#0A1931]/60 text-[#93C5FD] border border-[#4A7FA7]/30 hover:border-[#60A5FA] hover:text-white hover:bg-[#4A7FA7]/30"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
-
-              {/* Skills Tags */}
-              <div
-                className="flex flex-wrap gap-2 pt-4"
-                style={{ borderTop: '1px solid rgba(74, 127, 167, 0.15)' }}
-              >
-                {cat.skills.map((skill, sIdx) => (
-                  <span
-                    key={sIdx}
-                    className="text-xs sm:text-sm font-medium px-3 py-1.5 rounded-lg transition-all hover:scale-105"
-                    style={{
-                      backgroundColor: 'rgba(10, 25, 49, 0.5)',
-                      color: '#4A7FA7',
-                      border: '1px solid rgba(74, 127, 167, 0.3)',
-                    }}
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
+            </Reveal>
           ))}
         </div>
 

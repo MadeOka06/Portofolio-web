@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { IconExternalLink, IconGithub, IconX, IconCheckCircle } from '../common/Icons';
 import { projectsData } from '../../data/portfolioData';
 import type { ProjectItem } from '../../types';
+import Reveal from '../common/Reveal';
 
 export default function Projects() {
   const [selectedCategory, setSelectedCategory] = useState<string>('Semua');
@@ -17,185 +18,131 @@ export default function Projects() {
   return (
     <section
       id="proyek"
-      className="py-20 md:py-28"
-      style={{ borderBottom: '1px solid rgba(74,127,167,0.15)' }}
+      className="py-20 md:py-28 relative"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <span
-            className="text-xs sm:text-sm font-semibold uppercase tracking-wider px-3 py-1 rounded-full"
-            style={{
-              color: '#4A7FA7',
-              backgroundColor: 'rgba(74, 127, 167, 0.12)',
-              border: '1px solid rgba(74, 127, 167, 0.3)',
-            }}
-          >
-            Portofolio Unggulan
-          </span>
-          <h2
-            className="text-3xl sm:text-4xl font-extrabold mt-3 mb-4 tracking-tight"
-            style={{ color: '#F6FAFD' }}
-          >
-            Proyek Pilihan
-          </h2>
-          <p className="text-base sm:text-lg" style={{ color: '#B3CFE5' }}>
-            Berikut adalah proyek pengembangan perangkat lunak dan aplikasi yang telah saya rancang serta kembangkan.
-          </p>
+          <Reveal animation="fade-down">
+            <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full bg-[#4A7FA7]/15 border border-[#4A7FA7]/30 text-[#60A5FA]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA]" />
+              Portofolio Unggulan
+            </span>
+          </Reveal>
+
+          <Reveal animation="fade-up" delay={150}>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mt-3 mb-4 tracking-tight text-[#F6FAFD]">
+              Proyek Pilihan
+            </h2>
+            <p className="text-base sm:text-lg text-[#B3CFE5]">
+              Berikut adalah proyek pengembangan perangkat lunak dan aplikasi yang telah saya rancang serta kembangkan.
+            </p>
+          </Reveal>
         </div>
 
         {/* Category Filter Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
-          {categories.map((category) => {
-            const isSelected = selectedCategory === category;
-            return (
-              <button
-                key={category}
-                type="button"
-                onClick={() => setSelectedCategory(category)}
-                className="px-4 py-2 text-sm font-semibold rounded-xl transition-all cursor-pointer hover:scale-105 active:scale-95"
-                style={{
-                  backgroundColor: isSelected ? '#4A7FA7' : 'rgba(26, 61, 99, 0.7)',
-                  color: isSelected ? '#F6FAFD' : '#B3CFE5',
-                  border: isSelected
-                    ? '1px solid #4A7FA7'
-                    : '1px solid rgba(74, 127, 167, 0.2)',
-                  boxShadow: isSelected ? '0 4px 16px rgba(74,127,167,0.35)' : 'none',
-                }}
-              >
-                {category}
-              </button>
-            );
-          })}
-        </div>
+        <Reveal animation="fade-up" delay={250}>
+          <div className="flex flex-wrap items-center justify-center gap-2.5 mb-14">
+            {categories.map((category) => {
+              const isSelected = selectedCategory === category;
+              return (
+                <button
+                  key={category}
+                  type="button"
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-5 py-2 text-sm font-semibold rounded-full transition-all duration-300 cursor-pointer ${
+                    isSelected
+                      ? 'bg-gradient-to-r from-[#4A7FA7] to-[#2563EB] text-white shadow-[0_4px_18px_rgba(37,99,235,0.4)] scale-105'
+                      : 'bg-[#1A3D63]/50 text-[#B3CFE5] border border-[#4A7FA7]/30 hover:border-[#60A5FA]/60 hover:text-white'
+                  }`}
+                >
+                  {category}
+                </button>
+              );
+            })}
+          </div>
+        </Reveal>
 
         {/* Project Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {filteredProjects.map((project) => (
-            <div
+          {filteredProjects.map((project, idx) => (
+            <Reveal
               key={project.id}
-              className="rounded-2xl overflow-hidden flex flex-col justify-between transition-all duration-300 group hover:-translate-y-2"
-              style={{
-                backgroundColor: 'rgba(26, 61, 99, 0.7)',
-                backdropFilter: 'blur(12px)',
-                WebkitBackdropFilter: 'blur(12px)',
-                border: '1px solid rgba(74, 127, 167, 0.2)',
-                boxShadow: '0 4px 24px rgba(10,25,49,0.3)',
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.border = '1px solid rgba(74, 127, 167, 0.5)';
-                (e.currentTarget as HTMLElement).style.boxShadow = '0 16px 48px rgba(74,127,167,0.2)';
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.border = '1px solid rgba(74, 127, 167, 0.2)';
-                (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 24px rgba(10,25,49,0.3)';
-              }}
+              animation="fade-up"
+              delay={idx * 120}
             >
-              {/* Card Header */}
               <div
-                className="p-6 sm:p-8"
-                style={{
-                  background: `linear-gradient(135deg, rgba(26,61,99,0.9) 0%, rgba(10,25,49,0.6) 100%)`,
-                  borderBottom: '1px solid rgba(74, 127, 167, 0.15)',
-                }}
+                className="h-full rounded-3xl overflow-hidden flex flex-col justify-between transition-all duration-400 group hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(74,127,167,0.22)] bg-gradient-to-b from-[#1A3D63]/70 via-[#132d4a]/75 to-[#0b1c31]/85 backdrop-blur-xl border border-[#4A7FA7]/25 hover:border-[#60A5FA]/60"
               >
-                <div className="flex items-center justify-between mb-3">
-                  <span
-                    className="px-3 py-1 rounded-full text-xs font-semibold"
-                    style={{
-                      backgroundColor: 'rgba(10, 25, 49, 0.7)',
-                      color: '#4A7FA7',
-                      border: '1px solid rgba(74, 127, 167, 0.35)',
-                    }}
-                  >
-                    {project.category}
-                  </span>
-                  <div className="flex items-center gap-2">
-                    {project.githubUrl && (
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="p-2 rounded-lg transition-colors"
-                        style={{
-                          backgroundColor: 'rgba(10,25,49,0.6)',
-                          color: '#B3CFE5',
-                          border: '1px solid rgba(74,127,167,0.2)',
-                        }}
-                        title="Source Code"
-                      >
-                        <IconGithub className="w-4 h-4" />
-                      </a>
-                    )}
-                    {project.demoUrl && (
+                {/* Card Header */}
+                <div className="p-7 sm:p-8 bg-gradient-to-b from-white/5 to-transparent border-b border-[#4A7FA7]/15">
+                  <div className="flex items-center justify-between mb-3.5">
+                    <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[#0A1931]/70 text-[#93C5FD] border border-[#4A7FA7]/35 shadow-inner">
+                      {project.category}
+                    </span>
+                    <div className="flex items-center gap-2">
+                      {project.githubUrl && (
+                        <a
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="p-2.5 rounded-xl transition-all duration-300 hover:scale-110 bg-[#0A1931]/60 text-[#B3CFE5] hover:text-white border border-[#4A7FA7]/25 hover:border-[#60A5FA]"
+                          title="Source Code"
+                        >
+                          <IconGithub className="w-4 h-4" />
+                        </a>
+                      )}
+                      {project.demoUrl && (
+                        <button
+                          type="button"
+                          onClick={() => setActiveModalProject(project)}
+                          className="p-2.5 rounded-xl transition-all duration-300 hover:scale-110 cursor-pointer bg-[#0A1931]/60 text-[#B3CFE5] hover:text-white border border-[#4A7FA7]/25 hover:border-[#60A5FA]"
+                          title="Detail Proyek"
+                        >
+                          <IconExternalLink className="w-4 h-4" />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  <h3 className="text-2xl font-bold text-[#F6FAFD] group-hover:text-sky-300 transition-colors">
+                    {project.title}
+                  </h3>
+                </div>
+
+                {/* Card Body */}
+                <div className="p-7 sm:p-8 flex flex-col justify-between flex-1">
+                  <p className="text-sm sm:text-base leading-relaxed mb-6 text-[#B3CFE5]/90">
+                    {project.summary}
+                  </p>
+
+                  <div className="space-y-5 pt-4 border-t border-[#4A7FA7]/15">
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map((tag, tIdx) => (
+                        <span
+                          key={tIdx}
+                          className="text-xs font-medium px-3 py-1 rounded-full bg-[#0A1931]/50 text-[#B3CFE5] border border-[#4A7FA7]/20"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="flex items-center justify-between pt-2">
                       <button
                         type="button"
                         onClick={() => setActiveModalProject(project)}
-                        className="p-2 rounded-lg transition-colors cursor-pointer"
-                        style={{
-                          backgroundColor: 'rgba(10,25,49,0.6)',
-                          color: '#B3CFE5',
-                          border: '1px solid rgba(74,127,167,0.2)',
-                        }}
-                        title="Detail Proyek"
+                        className="inline-flex items-center gap-2 text-sm font-semibold transition-all duration-300 cursor-pointer text-[#60A5FA] hover:text-sky-300 group/btn"
                       >
-                        <IconExternalLink className="w-4 h-4" />
+                        Pelajari Selengkapnya
+                        <span className="transition-transform group-hover/btn:translate-x-1.5">→</span>
                       </button>
-                    )}
-                  </div>
-                </div>
-
-                <h3
-                  className="text-2xl font-bold transition-colors"
-                  style={{ color: '#F6FAFD' }}
-                >
-                  {project.title}
-                </h3>
-              </div>
-
-              {/* Card Body */}
-              <div className="p-6 sm:p-8 flex flex-col justify-between flex-1">
-                <p className="text-sm sm:text-base leading-relaxed mb-6" style={{ color: '#B3CFE5' }}>
-                  {project.summary}
-                </p>
-
-                <div
-                  className="space-y-5 pt-4"
-                  style={{ borderTop: '1px solid rgba(74,127,167,0.15)' }}
-                >
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag, tIdx) => (
-                      <span
-                        key={tIdx}
-                        className="text-xs font-medium px-2.5 py-1 rounded-md"
-                        style={{
-                          backgroundColor: 'rgba(10, 25, 49, 0.5)',
-                          color: '#B3CFE5',
-                          border: '1px solid rgba(74,127,167,0.15)',
-                        }}
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex items-center justify-between pt-2">
-                    <button
-                      type="button"
-                      onClick={() => setActiveModalProject(project)}
-                      className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors cursor-pointer group/btn"
-                      style={{ color: '#4A7FA7' }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#6098bf'; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = '#4A7FA7'; }}
-                    >
-                      Pelajari Selengkapnya
-                      <span className="transition-transform group-hover/btn:translate-x-1">→</span>
-                    </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
 
@@ -204,96 +151,65 @@ export default function Projects() {
       {/* ── Modal Project Detail ── */}
       {activeModalProject && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm animate-fadeIn"
-          style={{ backgroundColor: 'rgba(10, 25, 49, 0.8)' }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-black/60 animate-fadeIn"
           onClick={() => setActiveModalProject(null)}
         >
           <div
-            className="max-w-2xl w-full p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto rounded-2xl"
-            style={{
-              backgroundColor: '#1A3D63',
-              border: '1px solid rgba(74, 127, 167, 0.3)',
-              boxShadow: '0 24px 80px rgba(10,25,49,0.7)',
-            }}
+            className="max-w-2xl w-full p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto rounded-3xl bg-[#0d2238]/95 border border-[#4A7FA7]/40 shadow-[0_25px_80px_rgba(0,0,0,0.8)]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close */}
             <button
               type="button"
               onClick={() => setActiveModalProject(null)}
-              className="absolute top-5 right-5 p-2 rounded-lg transition-colors cursor-pointer"
-              style={{ color: '#B3CFE5', backgroundColor: 'rgba(10,25,49,0.4)' }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = '#F6FAFD'; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = '#B3CFE5'; }}
+              className="absolute top-5 right-5 p-2 rounded-xl transition-all duration-300 hover:scale-110 cursor-pointer text-[#B3CFE5] hover:text-white bg-[#0A1931]/60 border border-[#4A7FA7]/30"
             >
               <IconX className="w-5 h-5" />
             </button>
 
-            <span
-              className="inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3"
-              style={{
-                backgroundColor: 'rgba(74, 127, 167, 0.15)',
-                color: '#4A7FA7',
-                border: '1px solid rgba(74, 127, 167, 0.3)',
-              }}
-            >
+            <span className="inline-block px-3.5 py-1 rounded-full text-xs font-semibold mb-3 bg-[#4A7FA7]/20 text-[#60A5FA] border border-[#4A7FA7]/40">
               {activeModalProject.category}
             </span>
 
-            <h3 className="text-2xl sm:text-3xl font-extrabold mb-4" style={{ color: '#F6FAFD' }}>
+            <h3 className="text-2xl sm:text-3xl font-extrabold mb-4 text-[#F6FAFD]">
               {activeModalProject.title}
             </h3>
 
-            <p className="leading-relaxed mb-6" style={{ color: '#B3CFE5' }}>
+            <p className="leading-relaxed mb-6 text-[#B3CFE5]">
               {activeModalProject.fullDescription}
             </p>
 
-            <h4
-              className="text-sm font-bold uppercase tracking-wider mb-3"
-              style={{ color: '#4A7FA7' }}
-            >
+            <h4 className="text-sm font-bold uppercase tracking-wider mb-3 text-[#60A5FA]">
               Fitur &amp; Kemampuan Utama:
             </h4>
-            <div className="space-y-2 mb-6">
+            <div className="space-y-2.5 mb-6">
               {activeModalProject.features.map((feat, fIdx) => (
-                <div key={fIdx} className="flex items-start gap-2.5 text-sm" style={{ color: '#B3CFE5' }}>
-                  <IconCheckCircle className="w-4 h-4 shrink-0 mt-0.5" style={{ color: '#4A7FA7' }} />
+                <div key={fIdx} className="flex items-start gap-2.5 text-sm text-[#B3CFE5]">
+                  <IconCheckCircle className="w-4 h-4 shrink-0 mt-0.5 text-[#38BDF8]" />
                   <span>{feat}</span>
                 </div>
               ))}
             </div>
 
-            <h4
-              className="text-sm font-bold uppercase tracking-wider mb-3"
-              style={{ color: '#4A7FA7' }}
-            >
+            <h4 className="text-sm font-bold uppercase tracking-wider mb-3 text-[#60A5FA]">
               Teknologi Digunakan:
             </h4>
             <div className="flex flex-wrap gap-2 mb-8">
               {activeModalProject.tags.map((tag, tIdx) => (
                 <span
                   key={tIdx}
-                  className="text-xs font-medium px-3 py-1 rounded-lg"
-                  style={{
-                    backgroundColor: 'rgba(74, 127, 167, 0.12)',
-                    color: '#4A7FA7',
-                    border: '1px solid rgba(74, 127, 167, 0.3)',
-                  }}
+                  className="text-xs font-medium px-3 py-1.5 rounded-full bg-[#1A3D63]/60 text-[#93C5FD] border border-[#4A7FA7]/30"
                 >
                   {tag}
                 </span>
               ))}
             </div>
 
-            <div
-              className="flex items-center justify-end gap-3 pt-4"
-              style={{ borderTop: '1px solid rgba(74,127,167,0.2)' }}
-            >
+            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#4A7FA7]/20">
               <button
                 type="button"
                 onClick={() => setActiveModalProject(null)}
-                className="px-4 py-2 text-sm font-semibold rounded-lg transition-colors cursor-pointer"
-                style={{ color: '#B3CFE5', backgroundColor: 'rgba(10,25,49,0.4)' }}
+                className="px-5 py-2.5 text-sm font-semibold rounded-xl transition-colors cursor-pointer text-[#B3CFE5] hover:text-white bg-[#0A1931]/60"
               >
                 Tutup
               </button>
@@ -302,12 +218,7 @@ export default function Projects() {
                   href={activeModalProject.githubUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2 text-sm font-semibold rounded-lg shadow-sm transition-all hover:scale-105"
-                  style={{
-                    backgroundColor: '#4A7FA7',
-                    color: '#F6FAFD',
-                    boxShadow: '0 4px 16px rgba(74,127,167,0.35)',
-                  }}
+                  className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 hover:scale-105 bg-gradient-to-r from-[#4A7FA7] to-[#2563EB] text-white shadow-lg"
                 >
                   <IconGithub className="w-4 h-4" />
                   Lihat Repository
