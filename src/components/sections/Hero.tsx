@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { IconArrowRight, IconDownload } from '../common/Icons';
 import { profileData } from '../../data/portfolioData';
-import Reveal from '../common/Reveal';
 
 export default function Hero() {
   const roles = profileData.roles || [];
@@ -45,18 +44,16 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
 
           {/* ── Kolom Teks (Kiri) ── */}
-          <div className="lg:col-span-7 text-left space-y-6">
+          <div className="lg:col-span-7 text-left space-y-6 animate-fadeIn">
             
             {/* Status Pill Badge */}
-            <Reveal animation="fade-down" delay={100}>
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold tracking-wide bg-[#1A3D63]/60 border border-[#4A7FA7]/30 text-[#F6FAFD] shadow-[0_4px_16px_rgba(74,127,167,0.15)] backdrop-blur-md">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_#34d399]" />
-                <span>Terbuka untuk Peluang &amp; Magang</span>
-              </div>
-            </Reveal>
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold tracking-wide bg-[#1A3D63]/70 border border-[#4A7FA7]/35 text-[#F6FAFD] shadow-[0_4px_16px_rgba(74,127,167,0.15)] backdrop-blur-md">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_#34d399]" />
+              <span>Terbuka untuk Peluang &amp; Magang</span>
+            </div>
 
             {/* Headline */}
-            <Reveal animation="fade-up" delay={200}>
+            <div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-[#F6FAFD]">
                 Halo, Saya{' '}
                 <span className="relative inline-block text-[#60A5FA]">
@@ -81,78 +78,70 @@ export default function Hero() {
                   {displayRole}
                 </span>
               </div>
-            </Reveal>
+            </div>
 
             {/* Subtitle & Education */}
-            <Reveal animation="fade-up" delay={300}>
-              <p className="text-base sm:text-lg font-medium leading-snug text-[#E2E8F0]">
-                {profileData.education} di{' '}
-                <span className="text-[#60A5FA] font-semibold">{profileData.campus}</span>.
-              </p>
-            </Reveal>
+            <p className="text-base sm:text-lg font-medium leading-snug text-[#E2E8F0]">
+              {profileData.education} di{' '}
+              <span className="text-[#60A5FA] font-semibold">{profileData.campus}</span>.
+            </p>
 
             {/* Bio */}
-            <Reveal animation="fade-up" delay={400}>
-              <p className="text-base sm:text-lg leading-relaxed max-w-2xl text-[#B3CFE5]/90">
-                {profileData.bio}
-              </p>
-            </Reveal>
+            <p className="text-base sm:text-lg leading-relaxed max-w-2xl text-[#B3CFE5]/90">
+              {profileData.bio}
+            </p>
 
             {/* CTA Buttons */}
-            <Reveal animation="fade-up" delay={500}>
-              <div className="flex flex-wrap items-center gap-4 pt-2">
-                <a
-                  href="#kontak"
-                  className="btn-shimmer inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-2xl font-semibold text-base transition-all duration-300 hover:scale-105 active:scale-95 bg-gradient-to-r from-[#4A7FA7] to-[#2563EB] text-white shadow-[0_8px_25px_rgba(37,99,235,0.35)] hover:shadow-[0_12px_30px_rgba(37,99,235,0.5)]"
-                >
-                  Hubungi Saya
-                  <IconArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </a>
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <a
+                href="#kontak"
+                className="btn-shimmer inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-2xl font-semibold text-base transition-all duration-300 hover:scale-105 active:scale-95 bg-gradient-to-r from-[#4A7FA7] to-[#2563EB] text-white shadow-[0_8px_25px_rgba(37,99,235,0.35)] hover:shadow-[0_12px_30px_rgba(37,99,235,0.5)]"
+              >
+                Hubungi Saya
+                <IconArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </a>
 
-                <a
-                  href={profileData.resumeUrl}
-                  className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-2xl font-semibold text-base transition-all duration-300 hover:scale-105 active:scale-95 bg-[#1A3D63]/50 text-[#F6FAFD] border border-[#4A7FA7]/40 hover:bg-[#4A7FA7]/20 backdrop-blur-md"
-                >
-                  <IconDownload className="w-4 h-4 text-[#60A5FA]" />
-                  Unduh CV
-                </a>
-              </div>
-            </Reveal>
+              <a
+                href={profileData.resumeUrl}
+                className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-2xl font-semibold text-base transition-all duration-300 hover:scale-105 active:scale-95 bg-[#1A3D63]/50 text-[#F6FAFD] border border-[#4A7FA7]/40 hover:bg-[#4A7FA7]/20 backdrop-blur-md"
+              >
+                <IconDownload className="w-4 h-4 text-[#60A5FA]" />
+                Unduh CV
+              </a>
+            </div>
 
             {/* Metrics */}
-            <Reveal animation="fade-up" delay={600}>
-              <div className="grid grid-cols-3 gap-6 pt-6 max-w-lg border-t border-[#4A7FA7]/20">
-                <div className="space-y-1">
-                  <p className="text-2xl sm:text-3xl font-extrabold text-[#F6FAFD]">
-                    {profileData.metrics.semester}
-                  </p>
-                  <p className="text-xs sm:text-sm font-medium text-[#B3CFE5]">
-                    Teknologi Informasi
-                  </p>
-                </div>
-                <div className="space-y-1">
-                  <p className="text-2xl sm:text-3xl font-extrabold text-[#38BDF8]">
-                    {profileData.metrics.projectsCount}
-                  </p>
-                  <p className="text-xs sm:text-sm font-medium text-[#B3CFE5]">
-                    Web &amp; Mobile Apps
-                  </p>
-                </div>
-                <div className="space-y-1">
-                  <p className="text-2xl sm:text-3xl font-extrabold text-[#F6FAFD]">
-                    HMTI
-                  </p>
-                  <p className="text-xs sm:text-sm font-medium text-[#B3CFE5]">
-                    {profileData.metrics.organization}
-                  </p>
-                </div>
+            <div className="grid grid-cols-3 gap-6 pt-6 max-w-lg border-t border-[#4A7FA7]/20">
+              <div className="space-y-1">
+                <p className="text-2xl sm:text-3xl font-extrabold text-[#F6FAFD]">
+                  {profileData.metrics.semester}
+                </p>
+                <p className="text-xs sm:text-sm font-medium text-[#B3CFE5]">
+                  Teknologi Informasi
+                </p>
               </div>
-            </Reveal>
+              <div className="space-y-1">
+                <p className="text-2xl sm:text-3xl font-extrabold text-[#38BDF8]">
+                  {profileData.metrics.projectsCount}
+                </p>
+                <p className="text-xs sm:text-sm font-medium text-[#B3CFE5]">
+                  Web &amp; Mobile Apps
+                </p>
+              </div>
+              <div className="space-y-1">
+                <p className="text-2xl sm:text-3xl font-extrabold text-[#F6FAFD]">
+                  HMTI
+                </p>
+                <p className="text-xs sm:text-sm font-medium text-[#B3CFE5]">
+                  {profileData.metrics.organization}
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* ── Kolom Visual / Avatar (Kanan) ── */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <Reveal animation="zoom-in" delay={300} className="relative group">
+          <div className="lg:col-span-5 flex justify-center lg:justify-end animate-fadeIn">
+            <div className="relative group">
               
               {/* Organic blob glow behind avatar */}
               <div
@@ -218,7 +207,7 @@ export default function Hero() {
                   </span>
                 </div>
               </div>
-            </Reveal>
+            </div>
           </div>
 
         </div>

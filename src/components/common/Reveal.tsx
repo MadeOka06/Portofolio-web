@@ -15,46 +15,67 @@ export default function Reveal({
   className = '',
   animation = 'fade-up',
   delay = 0,
-  duration = 750,
-  threshold = 0.12,
+  duration = 700,
+  threshold = 0.1,
   width = 'full',
 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    // If IntersectionObserver is not available, reveal immediately
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      setIsVisible(true);
+      return;
+    }
+
     const el = ref.current;
-    if (!el) return;
+    if (!el) {
+      setIsVisible(true);
+      return;
+    }
+
+    // Fallback timer: ensure content is revealed even if observer is slow or blocked
+    const fallbackTimer = setTimeout(() => {
+      setIsVisible(true);
+    }, 1500 + delay);
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(el);
-        }
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+            clearTimeout(fallbackTimer);
+            observer.unobserve(entry.target);
+          }
+        });
       },
       {
         threshold,
-        rootMargin: '0px 0px -40px 0px',
+        rootMargin: '50px 0px 0px 0px', // trigger slightly before entering viewport
       }
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
-  }, [threshold]);
+
+    return () => {
+      clearTimeout(fallbackTimer);
+      observer.disconnect();
+    };
+  }, [threshold, delay]);
 
   const getInitialTransform = () => {
     switch (animation) {
       case 'fade-up':
-        return 'translate3d(0, 36px, 0) scale(0.97)';
+        return 'translate3d(0, 30px, 0)';
       case 'fade-down':
-        return 'translate3d(0, -36px, 0) scale(0.97)';
+        return 'translate3d(0, -30px, 0)';
       case 'fade-left':
-        return 'translate3d(45px, 0, 0)';
+        return 'translate3d(35px, 0, 0)';
       case 'fade-right':
-        return 'translate3d(-45px, 0, 0)';
+        return 'translate3d(-35px, 0, 0)';
       case 'zoom-in':
-        return 'scale(0.9)';
+        return 'scale(0.94)';
       case 'fade':
       default:
         return 'translate3d(0, 0, 0)';
