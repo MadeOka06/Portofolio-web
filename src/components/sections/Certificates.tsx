@@ -40,12 +40,12 @@ export default function Certificates() {
           </div>
         </Reveal>
 
-        {/* ── Certificates Grid with Scroll Reveal ── */}
+        {/* ── Certificates Grid with Scroll Reveal (Full Uncropped Images) ── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {certificatesData.map((cert, idx) => (
             <Reveal key={cert.id} animation="fade-up" delay={idx * 100}>
               <div
-                className="editorial-row border border-[#DDD9CD] bg-[#F5F3EC] p-8 flex flex-col justify-between h-full group"
+                className="editorial-row border border-[#DDD9CD] bg-[#F5F3EC] p-6 sm:p-8 flex flex-col justify-between h-full group"
               >
                 <div>
                   {/* Meta Top Bar */}
@@ -66,14 +66,26 @@ export default function Certificates() {
                     {cert.description}
                   </p>
 
-                  {/* Certificate Image Frame */}
+                  {/* Certificate Image Frame (Full & Completely Uncropped) */}
                   {cert.image && (
-                    <div className="border border-[#DDD9CD] mb-6 overflow-hidden bg-[#DDD9CD]">
-                      <img
-                        src={cert.image}
-                        alt={cert.title}
-                        className="w-full h-64 object-cover filter contrast-105 hover:contrast-100 transition-all duration-300"
-                      />
+                    <div
+                      className="border border-[#DDD9CD] p-2 bg-[#EFECE3] mb-6 cursor-pointer group/frame transition-colors hover:border-[#121212]"
+                      onClick={() => setSelectedCert(cert)}
+                      title="Klik untuk memperbesar sertifikat"
+                    >
+                      <div className="border border-[#DDD9CD]/80 overflow-hidden bg-white">
+                        <img
+                          src={cert.image}
+                          alt={cert.title}
+                          className="w-full h-auto object-contain block transition-transform duration-300 group-hover/frame:scale-[1.01]"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div className="pt-2 text-right">
+                        <span className="font-mono-swiss text-[10px] text-[#87857E] group-hover/frame:text-[#121212]">
+                          [ KLIK UNTUK RESOLUSI PENUH ↗ ]
+                        </span>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -121,20 +133,21 @@ export default function Certificates() {
 
       </div>
 
-      {/* ── Modal Preview Kredensial ── */}
+      {/* ── Modal Preview Kredensial (Full High-Res Display) ── */}
       {selectedCert && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#121212]/70"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#121212]/75 overflow-y-auto"
           onClick={() => setSelectedCert(null)}
         >
           <div
-            className="max-w-xl w-full p-8 sm:p-10 bg-[#F5F3EC] border-2 border-[#121212] relative"
+            className="max-w-3xl w-full p-6 sm:p-10 bg-[#F5F3EC] border-2 border-[#121212] relative max-h-[95vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               type="button"
               onClick={() => setSelectedCert(null)}
               className="absolute top-6 right-6 p-2 border border-[#DDD9CD] hover:border-[#121212] text-[#121212] transition-colors cursor-pointer bg-[#EFECE3]"
+              aria-label="Tutup"
             >
               <IconX className="w-5 h-5" />
             </button>
@@ -143,13 +156,24 @@ export default function Certificates() {
               VERIFIKASI SERTIFIKASI // {selectedCert.year}
             </span>
 
-            <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-[#121212] mb-3">
+            <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-[#121212] mb-2">
               {selectedCert.title}
             </h3>
 
             <p className="font-mono-swiss text-xs text-[#585752] mb-6">
               PENERBIT: {selectedCert.issuer.toUpperCase()} ({selectedCert.year})
             </p>
+
+            {/* High-Res Full Certificate Image Display in Modal */}
+            {selectedCert.image && (
+              <div className="border border-[#DDD9CD] p-2 bg-[#EFECE3] mb-6">
+                <img
+                  src={selectedCert.image}
+                  alt={selectedCert.title}
+                  className="w-full h-auto object-contain block border border-[#DDD9CD]/80 bg-white"
+                />
+              </div>
+            )}
 
             <div className="border border-[#DDD9CD] p-4 bg-[#EFECE3] mb-6 font-mono-swiss text-xs space-y-2 text-[#585752]">
               <div className="flex justify-between">
