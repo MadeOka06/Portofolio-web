@@ -28,15 +28,15 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error("ErrorBoundary caught an error:", error, errorInfo);
+    console.error("ErrorBoundary caught:", error, errorInfo);
   }
 
   render() {
     if (this.state.hasError) {
       return (
-        <div className="p-8 text-center text-red-400 bg-[#0A1931]">
-          <p className="text-lg font-semibold">Komponen ini mengalami kendala saat dimuat.</p>
-          <pre className="text-xs text-left inline-block mt-4 p-4 rounded-xl bg-[#1A3D63]/80 overflow-auto max-w-full">
+        <div className="p-8 text-center text-[#C23616] bg-[#F5F3EC] border border-[#DDD9CD]">
+          <p className="font-mono-swiss text-xs font-semibold">TERJADI KENDALA PADA TAMPILAN SISTEM.</p>
+          <pre className="text-xs text-left inline-block mt-4 p-4 border border-[#DDD9CD] bg-[#EFECE3]">
             {this.state.error?.message}
           </pre>
         </div>
@@ -63,35 +63,28 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen antialiased flex flex-col relative overflow-x-hidden bg-[#0A1931] text-[#F6FAFD]">
+      <div className="min-h-screen relative bg-[#F5F3EC] text-[#121212] overflow-x-hidden selection:bg-[#121212] selection:text-[#F5F3EC]">
 
-        {/* ── Global Background Ambient Ornaments ── */}
+        {/* ── Exposed 12-Column Structural Grid Backdrop ── */}
         <div
-          className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+          className="pointer-events-none fixed inset-0 z-0 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-12"
           aria-hidden="true"
         >
-          {/* Top-left soft cyan-navy blob */}
-          <div
-            className="absolute -top-32 -left-32 w-[550px] h-[550px] rounded-full animate-blob opacity-40"
-            style={{ background: 'radial-gradient(circle, rgba(56,189,248,0.2) 0%, rgba(26,61,99,0.5) 50%, transparent 70%)', filter: 'blur(70px)' }}
-          />
-          {/* Bottom-right soft ocean blob */}
-          <div
-            className="absolute -bottom-32 -right-32 w-[650px] h-[650px] rounded-full animate-blob opacity-35"
-            style={{ background: 'radial-gradient(circle, rgba(74,127,167,0.35) 0%, rgba(15,35,60,0.5) 50%, transparent 70%)', filter: 'blur(80px)', animationDelay: '4s' }}
-          />
-          {/* Center ambient glow */}
-          <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] rounded-full opacity-25 animate-blob"
-            style={{ background: 'radial-gradient(ellipse, rgba(96,165,250,0.18) 0%, transparent 70%)', filter: 'blur(90px)', animationDelay: '2s' }}
-          />
+          {Array.from({ length: 12 }).map((_, i) => (
+            <div
+              key={i}
+              className={`h-full border-r ${
+                i === 0 ? 'border-l border-[#DDD9CD]/40' : ''
+              } border-[#DDD9CD]/40`}
+            />
+          ))}
         </div>
 
-        {/* ── Navigation Bar with Scroll Progress ── */}
+        {/* ── Fixed Swiss Top Bar (stays fixed while scrolling) ── */}
         <Navbar />
 
-        {/* ── Main Content ── */}
-        <main className="flex-1 w-full relative z-10">
+        {/* ── Main Content Container ── */}
+        <main className="relative z-10 w-full">
           <Hero />
           <Skills />
           <SoftSkills />
@@ -101,20 +94,21 @@ export default function App() {
           <Contact />
         </main>
 
-        {/* ── Floating Scroll-to-Top Button ── */}
+        {/* ── Sharp Minimalist Scroll-to-Top Button ── */}
         {showScrollTop && (
           <button
             type="button"
             onClick={scrollToTop}
-            className="fixed bottom-7 right-7 z-40 p-4 rounded-2xl text-white shadow-[0_8px_25px_rgba(74,127,167,0.5)] hover:scale-110 active:scale-95 cursor-pointer animate-fadeIn transition-all duration-300 bg-gradient-to-r from-[#4A7FA7] to-[#2563EB] border border-white/20 backdrop-blur-md"
+            className="fixed bottom-6 right-6 z-40 p-3 bg-[#F5F3EC] border border-[#121212] text-[#121212] hover:bg-[#121212] hover:text-[#F5F3EC] cursor-pointer transition-colors"
             aria-label="Kembali ke atas"
             title="Kembali ke atas"
           >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
             </svg>
           </button>
         )}
+
       </div>
     </ErrorBoundary>
   );

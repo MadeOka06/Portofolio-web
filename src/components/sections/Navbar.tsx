@@ -3,35 +3,23 @@ import { IconMenu, IconX } from '../common/Icons';
 import { profileData } from '../../data/portfolioData';
 
 const navLinks = [
-  { id: 'beranda', label: 'Beranda' },
-  { id: 'keahlian', label: 'Keahlian' },
-  { id: 'soft-skills', label: 'Soft Skills' },
-  { id: 'pengalaman', label: 'Pengalaman' },
-  { id: 'proyek', label: 'Proyek' },
-  { id: 'sertifikasi', label: 'Sertifikasi' },
-  { id: 'kontak', label: 'Kontak' },
+  { id: 'beranda', label: 'BERANDA', code: '01' },
+  { id: 'keahlian', label: 'KEAHLIAN', code: '02' },
+  { id: 'soft-skills', label: 'KOMPETENSI', code: '03' },
+  { id: 'pengalaman', label: 'ORGANISASI', code: '04' },
+  { id: 'proyek', label: 'PROYEK', code: '05' },
+  { id: 'sertifikasi', label: 'SERTIFIKASI', code: '06' },
+  { id: 'kontak', label: 'KONTAK', code: '07' },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('beranda');
-  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-
-      // Scroll progress percentage
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalHeight > 0) {
-        const progress = (window.scrollY / totalHeight) * 100;
-        setScrollProgress(progress);
-      }
-
-      // ScrollSpy logic
       const sections = navLinks.map((item) => document.getElementById(item.id));
-      const scrollPosition = window.scrollY + 200;
+      const scrollPosition = window.scrollY + 180;
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
         if (section && section.offsetTop <= scrollPosition) {
@@ -46,80 +34,84 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header
-      className={`sticky top-0 z-50 w-full transition-all duration-400 ${
-        scrolled
-          ? 'backdrop-blur-xl shadow-lg shadow-black/20 py-3 bg-[#0A1931]/85 border-b border-[#4A7FA7]/20'
-          : 'py-5 bg-transparent border-b border-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 z-50 w-full bg-[#F5F3EC] border-b border-[#DDD9CD]">
+      {/* ── Main Top Bar ── */}
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
 
-        {/* Logo */}
-        <a
-          href="#beranda"
-          className="text-2xl font-extrabold tracking-tight transition-transform hover:scale-105 active:scale-95 group flex items-center gap-1"
-          style={{ color: '#F6FAFD' }}
-        >
-          <span>{profileData.shortname}</span>
-          <span className="inline-block w-2 h-2 rounded-full bg-[#4A7FA7] group-hover:scale-125 transition-transform" />
-        </a>
+        {/* Wordmark & Folio */}
+        <div className="flex items-center gap-4">
+          <a
+            href="#beranda"
+            className="font-mono-swiss text-xs sm:text-sm font-semibold tracking-[0.1em] text-[#121212] hover:opacity-70 transition-opacity"
+          >
+            {profileData.name.toUpperCase()}
+          </a>
+          <span className="hidden sm:inline-block font-mono-swiss text-[11px] text-[#87857E] border-l border-[#DDD9CD] pl-4">
+            FOLIO // 2026
+          </span>
+        </div>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1 bg-[#1A3D63]/40 p-1.5 rounded-full border border-[#4A7FA7]/20 backdrop-blur-md">
+        {/* Desktop Editorial Navigation */}
+        <nav className="hidden lg:flex items-center gap-6">
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
             return (
               <a
                 key={link.id}
                 href={`#${link.id}`}
-                className={`px-4 py-1.5 text-sm font-medium rounded-full transition-all duration-300 ${
-                  isActive
-                    ? 'text-white bg-[#4A7FA7] shadow-[0_2px_12px_rgba(74,127,167,0.4)] scale-100 font-semibold'
-                    : 'text-[#B3CFE5] hover:text-white hover:bg-white/5'
-                }`}
+                className="font-mono-swiss text-[11px] tracking-[0.08em] flex items-center gap-1.5 transition-opacity py-1 text-[#121212] hover:opacity-60"
               >
-                {link.label}
+                {isActive && (
+                  <span className="w-1.5 h-1.5 bg-[#D84227] inline-block" />
+                )}
+                <span>{link.label}</span>
               </a>
             );
           })}
         </nav>
 
-        {/* Action Button (Desktop) */}
-        <div className="hidden md:flex items-center">
+        {/* CTA Link (Desktop) */}
+        <div className="hidden sm:flex items-center gap-4">
           <a
             href="#kontak"
-            className="btn-shimmer px-5 py-2.5 text-sm font-semibold rounded-full transition-all duration-300 hover:scale-105 active:scale-95 bg-gradient-to-r from-[#4A7FA7] to-[#3a688b] text-white shadow-[0_4px_16px_rgba(74,127,167,0.35)] hover:shadow-[0_6px_22px_rgba(74,127,167,0.5)]"
+            className="font-mono-swiss text-[11px] tracking-[0.08em] font-semibold text-[#121212] border-b border-[#121212] pb-0.5 hover:text-[#D84227] hover:border-[#D84227] transition-colors"
           >
-            Hubungi Saya
+            HUBUNGI SAYA →
           </a>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Hamburger Toggle */}
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 rounded-xl transition-colors bg-[#1A3D63]/60 border border-[#4A7FA7]/30 text-[#B3CFE5]"
-          aria-label="Toggle Navigation Menu"
+          className="lg:hidden p-1.5 text-[#121212] hover:opacity-60 transition-opacity"
+          aria-label="Menu"
         >
-          {isOpen ? <IconX className="w-6 h-6" /> : <IconMenu className="w-6 h-6" />}
+          {isOpen ? <IconX className="w-5 h-5" /> : <IconMenu className="w-5 h-5" />}
         </button>
       </div>
 
-      {/* Modern Scroll Progress Bar */}
-      <div className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-[#1A3D63]/30 overflow-hidden">
-        <div
-          className="h-full bg-gradient-to-r from-[#4A7FA7] via-[#60A5FA] to-[#38BDF8] transition-all duration-150 ease-out shadow-[0_0_8px_rgba(56,189,248,0.7)]"
-          style={{ width: `${scrollProgress}%` }}
-        />
+      {/* ── Metadata Ribbon Bar (Strict Swiss Monograph Divider) ── */}
+      <div className="border-t border-[#DDD9CD] bg-[#EFECE3] hidden md:block">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-1.5 grid grid-cols-12 text-[10px] font-mono-swiss text-[#585752]">
+          <div className="col-span-3 border-r border-[#DDD9CD] pr-4">
+            PROGRAM: {profileData.education.toUpperCase()}
+          </div>
+          <div className="col-span-4 border-r border-[#DDD9CD] px-4">
+            INSTITUSI: {profileData.campus.toUpperCase()}
+          </div>
+          <div className="col-span-3 border-r border-[#DDD9CD] px-4">
+            BIDANG: {profileData.role.toUpperCase()}
+          </div>
+          <div className="col-span-2 pl-4 text-right">
+            STATUS: AKTIF // MAGANG S6
+          </div>
+        </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* ── Mobile Menu Dropdown ── */}
       {isOpen && (
-        <div
-          className="md:hidden px-4 pt-3 pb-6 space-y-1.5 shadow-2xl backdrop-blur-2xl animate-fadeIn border-b border-[#4A7FA7]/20"
-          style={{ backgroundColor: 'rgba(10, 25, 49, 0.96)' }}
-        >
+        <div className="lg:hidden bg-[#F5F3EC] border-t border-[#DDD9CD] px-4 py-4 space-y-3">
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
             return (
@@ -127,13 +119,13 @@ export default function Navbar() {
                 key={link.id}
                 href={`#${link.id}`}
                 onClick={() => setIsOpen(false)}
-                className={`block px-4 py-2.5 text-base font-medium rounded-xl transition-all ${
-                  isActive
-                    ? 'text-white bg-[#4A7FA7]/30 border border-[#4A7FA7]/40 font-semibold'
-                    : 'text-[#B3CFE5] hover:text-white hover:bg-white/5'
-                }`}
+                className="font-mono-swiss text-xs tracking-[0.08em] flex items-center justify-between py-2 border-b border-[#DDD9CD]/60 text-[#121212]"
               >
-                {link.label}
+                <div className="flex items-center gap-2">
+                  {isActive && <span className="w-1.5 h-1.5 bg-[#D84227]" />}
+                  <span>{link.label}</span>
+                </div>
+                <span className="text-[#87857E] text-[10px]">{link.code}</span>
               </a>
             );
           })}
@@ -141,9 +133,9 @@ export default function Navbar() {
             <a
               href="#kontak"
               onClick={() => setIsOpen(false)}
-              className="block text-center w-full px-4 py-3 text-sm font-semibold rounded-xl transition-all bg-[#4A7FA7] text-white shadow-lg"
+              className="block text-center font-mono-swiss text-xs tracking-[0.08em] bg-[#121212] text-[#F5F3EC] py-2.5"
             >
-              Hubungi Saya
+              HUBUNGI SAYA →
             </a>
           </div>
         </div>

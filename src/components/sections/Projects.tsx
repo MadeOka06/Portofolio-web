@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { IconExternalLink, IconGithub, IconX, IconCheckCircle } from '../common/Icons';
+import { IconGithub, IconX } from '../common/Icons';
 import { projectsData } from '../../data/portfolioData';
 import type { ProjectItem } from '../../types';
-import Reveal from '../common/Reveal';
 
 export default function Projects() {
   const [selectedCategory, setSelectedCategory] = useState<string>('Semua');
@@ -16,34 +15,28 @@ export default function Projects() {
       : projectsData.filter((p) => p.category === selectedCategory);
 
   return (
-    <section
-      id="proyek"
-      className="py-20 md:py-28 relative"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="proyek" className="border-b border-[#DDD9CD] py-16 md:py-24">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <Reveal animation="fade-down">
-            <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full bg-[#4A7FA7]/15 border border-[#4A7FA7]/30 text-[#60A5FA]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA]" />
-              Portofolio Unggulan
-            </span>
-          </Reveal>
-
-          <Reveal animation="fade-up" delay={150}>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mt-3 mb-4 tracking-tight text-[#F6FAFD]">
-              Proyek Pilihan
-            </h2>
-            <p className="text-base sm:text-lg text-[#B3CFE5]">
-              Berikut adalah proyek pengembangan perangkat lunak dan aplikasi yang telah saya rancang serta kembangkan.
-            </p>
-          </Reveal>
+        {/* ── Section Index Header ── */}
+        <div className="grid grid-cols-12 pb-6 mb-12 border-b border-[#DDD9CD] text-[11px] font-mono-swiss text-[#585752]">
+          <div className="col-span-12 sm:col-span-4 flex items-center gap-2">
+            <span className="w-2 h-2 bg-[#D84227]" />
+            <span>SEC. 05 — PORTOFOLIO REKAYASA SISTEM</span>
+          </div>
+          <div className="col-span-12 sm:col-span-8 sm:text-right mt-1 sm:mt-0 text-[#87857E]">
+            PROYEK TERPILIH // FOLIO
+          </div>
         </div>
 
-        {/* Category Filter Pills */}
-        <Reveal animation="fade-up" delay={250}>
-          <div className="flex flex-wrap items-center justify-center gap-2.5 mb-14">
+        {/* Section Headline & Category Filter */}
+        <div className="grid grid-cols-12 gap-8 mb-12 items-end">
+          <div className="col-span-12 lg:col-span-6">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#121212] tracking-[-0.03em] leading-tight">
+              Artefak Perangkat Lunak &amp; Aplikasi.
+            </h2>
+          </div>
+          <div className="col-span-12 lg:col-span-6 flex flex-wrap gap-2 lg:justify-end">
             {categories.map((category) => {
               const isSelected = selectedCategory === category;
               return (
@@ -51,180 +44,173 @@ export default function Projects() {
                   key={category}
                   type="button"
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-5 py-2 text-sm font-semibold rounded-full transition-all duration-300 cursor-pointer ${
+                  className={`font-mono-swiss text-[11px] tracking-[0.08em] px-4 py-2 border transition-colors cursor-pointer ${
                     isSelected
-                      ? 'bg-gradient-to-r from-[#4A7FA7] to-[#2563EB] text-white shadow-[0_4px_18px_rgba(37,99,235,0.4)] scale-105'
-                      : 'bg-[#1A3D63]/50 text-[#B3CFE5] border border-[#4A7FA7]/30 hover:border-[#60A5FA]/60 hover:text-white'
+                      ? 'bg-[#121212] text-[#F5F3EC] border-[#121212]'
+                      : 'bg-[#F5F3EC] text-[#585752] border-[#DDD9CD] hover:border-[#121212] hover:text-[#121212]'
                   }`}
                 >
-                  {category}
+                  {category.toUpperCase()}
                 </button>
               );
             })}
           </div>
-        </Reveal>
+        </div>
 
-        {/* Project Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* ── Projects Stacked Editorial Showcase (0px Radius) ── */}
+        <div className="border-t border-[#DDD9CD]">
           {filteredProjects.map((project, idx) => (
-            <Reveal
+            <div
               key={project.id}
-              animation="fade-up"
-              delay={idx * 120}
+              className="editorial-row border-b border-[#DDD9CD] py-10 grid grid-cols-12 gap-y-6 lg:gap-8 items-start"
             >
-              <div
-                className="h-full rounded-3xl overflow-hidden flex flex-col justify-between transition-all duration-400 group hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(74,127,167,0.22)] bg-gradient-to-b from-[#1A3D63]/70 via-[#132d4a]/75 to-[#0b1c31]/85 backdrop-blur-xl border border-[#4A7FA7]/25 hover:border-[#60A5FA]/60"
-              >
-                {/* Card Header */}
-                <div className="p-7 sm:p-8 bg-gradient-to-b from-white/5 to-transparent border-b border-[#4A7FA7]/15">
-                  <div className="flex items-center justify-between mb-3.5">
-                    <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[#0A1931]/70 text-[#93C5FD] border border-[#4A7FA7]/35 shadow-inner">
-                      {project.category}
+              {/* Col 1-3: Index & Category */}
+              <div className="col-span-12 sm:col-span-3 space-y-2">
+                <span className="font-mono-swiss text-xs font-semibold text-[#D84227] block">
+                  PRJ.0{idx + 1} // {project.category.toUpperCase()}
+                </span>
+                <span className="font-mono-swiss text-[11px] text-[#87857E]">
+                  STATUS: DEPLOYED // REPO
+                </span>
+              </div>
+
+              {/* Col 4-7: Title & Summary */}
+              <div className="col-span-12 sm:col-span-5 space-y-3">
+                <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#121212]">
+                  {project.title}
+                </h3>
+                <p className="font-body text-sm sm:text-base text-[#585752] leading-relaxed">
+                  {project.summary}
+                </p>
+
+                {/* Tech Stack Pills (Monospace, Sharp) */}
+                <div className="flex flex-wrap gap-1.5 pt-2">
+                  {project.tags.map((tag, tIdx) => (
+                    <span
+                      key={tIdx}
+                      className="font-mono-swiss text-[10px] px-2 py-0.5 bg-[#EFECE3] border border-[#DDD9CD] text-[#121212]"
+                    >
+                      {tag}
                     </span>
-                    <div className="flex items-center gap-2">
-                      {project.githubUrl && (
-                        <a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="p-2.5 rounded-xl transition-all duration-300 hover:scale-110 bg-[#0A1931]/60 text-[#B3CFE5] hover:text-white border border-[#4A7FA7]/25 hover:border-[#60A5FA]"
-                          title="Source Code"
-                        >
-                          <IconGithub className="w-4 h-4" />
-                        </a>
-                      )}
-                      {project.demoUrl && (
-                        <button
-                          type="button"
-                          onClick={() => setActiveModalProject(project)}
-                          className="p-2.5 rounded-xl transition-all duration-300 hover:scale-110 cursor-pointer bg-[#0A1931]/60 text-[#B3CFE5] hover:text-white border border-[#4A7FA7]/25 hover:border-[#60A5FA]"
-                          title="Detail Proyek"
-                        >
-                          <IconExternalLink className="w-4 h-4" />
-                        </button>
-                      )}
-                    </div>
-                  </div>
-
-                  <h3 className="text-2xl font-bold text-[#F6FAFD] group-hover:text-sky-300 transition-colors">
-                    {project.title}
-                  </h3>
-                </div>
-
-                {/* Card Body */}
-                <div className="p-7 sm:p-8 flex flex-col justify-between flex-1">
-                  <p className="text-sm sm:text-base leading-relaxed mb-6 text-[#B3CFE5]/90">
-                    {project.summary}
-                  </p>
-
-                  <div className="space-y-5 pt-4 border-t border-[#4A7FA7]/15">
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag, tIdx) => (
-                        <span
-                          key={tIdx}
-                          className="text-xs font-medium px-3 py-1 rounded-full bg-[#0A1931]/50 text-[#B3CFE5] border border-[#4A7FA7]/20"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="flex items-center justify-between pt-2">
-                      <button
-                        type="button"
-                        onClick={() => setActiveModalProject(project)}
-                        className="inline-flex items-center gap-2 text-sm font-semibold transition-all duration-300 cursor-pointer text-[#60A5FA] hover:text-sky-300 group/btn"
-                      >
-                        Pelajari Selengkapnya
-                        <span className="transition-transform group-hover/btn:translate-x-1.5">→</span>
-                      </button>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
-            </Reveal>
+
+              {/* Col 8-12: Actions & Spec Trigger */}
+              <div className="col-span-12 sm:col-span-4 flex flex-col justify-between sm:items-end space-y-4">
+                <button
+                  type="button"
+                  onClick={() => setActiveModalProject(project)}
+                  className="font-mono-swiss text-xs tracking-[0.08em] font-semibold text-[#121212] border-b border-[#121212] pb-0.5 hover:text-[#D84227] hover:border-[#D84227] transition-colors cursor-pointer text-left sm:text-right"
+                >
+                  DOKUMENTASI LENGKAP →
+                </button>
+
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-mono-swiss text-[11px] text-[#585752] hover:text-[#121212] flex items-center gap-1.5 transition-colors"
+                  >
+                    <IconGithub className="w-3.5 h-3.5" />
+                    <span>SOURCE CODE // GITHUB</span>
+                  </a>
+                )}
+              </div>
+            </div>
           ))}
         </div>
 
       </div>
 
-      {/* ── Modal Project Detail ── */}
+      {/* ── Swiss Editorial Broadsheet Modal ── */}
       {activeModalProject && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-black/60 animate-fadeIn"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#121212]/70 backdrop-blur-none"
           onClick={() => setActiveModalProject(null)}
         >
           <div
-            className="max-w-2xl w-full p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto rounded-3xl bg-[#0d2238]/95 border border-[#4A7FA7]/40 shadow-[0_25px_80px_rgba(0,0,0,0.8)]"
+            className="max-w-3xl w-full p-8 sm:p-12 bg-[#F5F3EC] border-2 border-[#121212] relative max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close */}
+            {/* Close Button (Square, Sharp) */}
             <button
               type="button"
               onClick={() => setActiveModalProject(null)}
-              className="absolute top-5 right-5 p-2 rounded-xl transition-all duration-300 hover:scale-110 cursor-pointer text-[#B3CFE5] hover:text-white bg-[#0A1931]/60 border border-[#4A7FA7]/30"
+              className="absolute top-6 right-6 p-2 border border-[#DDD9CD] hover:border-[#121212] text-[#121212] transition-colors cursor-pointer bg-[#EFECE3]"
+              aria-label="Tutup"
             >
               <IconX className="w-5 h-5" />
             </button>
 
-            <span className="inline-block px-3.5 py-1 rounded-full text-xs font-semibold mb-3 bg-[#4A7FA7]/20 text-[#60A5FA] border border-[#4A7FA7]/40">
-              {activeModalProject.category}
+            <span className="font-mono-swiss text-xs font-semibold text-[#D84227] block mb-2">
+              DOKUMENTASI PROYEK // {activeModalProject.category.toUpperCase()}
             </span>
 
-            <h3 className="text-2xl sm:text-3xl font-extrabold mb-4 text-[#F6FAFD]">
+            <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-[#121212] mb-6">
               {activeModalProject.title}
             </h3>
 
-            <p className="leading-relaxed mb-6 text-[#B3CFE5]">
+            <p className="font-body text-base text-[#585752] leading-relaxed mb-8 border-b border-[#DDD9CD] pb-6">
               {activeModalProject.fullDescription}
             </p>
 
-            <h4 className="text-sm font-bold uppercase tracking-wider mb-3 text-[#60A5FA]">
-              Fitur &amp; Kemampuan Utama:
-            </h4>
-            <div className="space-y-2.5 mb-6">
-              {activeModalProject.features.map((feat, fIdx) => (
-                <div key={fIdx} className="flex items-start gap-2.5 text-sm text-[#B3CFE5]">
-                  <IconCheckCircle className="w-4 h-4 shrink-0 mt-0.5 text-[#38BDF8]" />
-                  <span>{feat}</span>
-                </div>
-              ))}
+            {/* Features */}
+            <div className="mb-8">
+              <h4 className="font-mono-swiss text-xs font-semibold text-[#121212] mb-4">
+                FITUR &amp; ARSITEKTUR UTAMA:
+              </h4>
+              <div className="space-y-3">
+                {activeModalProject.features.map((feat, fIdx) => (
+                  <div key={fIdx} className="flex items-start gap-3 font-body text-sm text-[#121212]">
+                    <span className="font-mono-swiss text-[#D84227] text-xs mt-0.5">●</span>
+                    <span className="leading-relaxed">{feat}</span>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <h4 className="text-sm font-bold uppercase tracking-wider mb-3 text-[#60A5FA]">
-              Teknologi Digunakan:
-            </h4>
-            <div className="flex flex-wrap gap-2 mb-8">
-              {activeModalProject.tags.map((tag, tIdx) => (
-                <span
-                  key={tIdx}
-                  className="text-xs font-medium px-3 py-1.5 rounded-full bg-[#1A3D63]/60 text-[#93C5FD] border border-[#4A7FA7]/30"
-                >
-                  {tag}
-                </span>
-              ))}
+            {/* Stack */}
+            <div className="mb-8 border-t border-[#DDD9CD] pt-6">
+              <h4 className="font-mono-swiss text-xs font-semibold text-[#121212] mb-3">
+                TEKNOLOGI DIGUNAKAN:
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {activeModalProject.tags.map((tag, tIdx) => (
+                  <span
+                    key={tIdx}
+                    className="font-mono-swiss text-xs px-3 py-1 bg-[#EFECE3] border border-[#DDD9CD] text-[#121212]"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
 
-            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#4A7FA7]/20">
+            {/* Footer Action */}
+            <div className="flex items-center justify-between border-t border-[#121212] pt-6">
               <button
                 type="button"
                 onClick={() => setActiveModalProject(null)}
-                className="px-5 py-2.5 text-sm font-semibold rounded-xl transition-colors cursor-pointer text-[#B3CFE5] hover:text-white bg-[#0A1931]/60"
+                className="font-mono-swiss text-xs tracking-[0.08em] text-[#585752] hover:text-[#121212] cursor-pointer"
               >
-                Tutup
+                [ TUTUP MODAL ]
               </button>
+
               {activeModalProject.githubUrl && (
                 <a
                   href={activeModalProject.githubUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 hover:scale-105 bg-gradient-to-r from-[#4A7FA7] to-[#2563EB] text-white shadow-lg"
+                  className="font-mono-swiss text-xs tracking-[0.08em] px-5 py-2.5 bg-[#121212] text-[#F5F3EC] hover:bg-[#D84227] transition-colors flex items-center gap-2"
                 >
                   <IconGithub className="w-4 h-4" />
-                  Lihat Repository
+                  <span>LIHAT REPOSITORY →</span>
                 </a>
               )}
             </div>
+
           </div>
         </div>
       )}

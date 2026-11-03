@@ -1,125 +1,115 @@
 import { useState } from 'react';
-import { IconAward, IconCheckCircle, IconExternalLink, IconX } from '../common/Icons';
+import { IconExternalLink, IconX } from '../common/Icons';
 import { certificatesData } from '../../data/portfolioData';
 import type { CertificateItem } from '../../types';
-import Reveal from '../common/Reveal';
 
 export default function Certificates() {
   const [selectedCert, setSelectedCert] = useState<CertificateItem | null>(null);
 
   return (
-    <section
-      id="sertifikasi"
-      className="py-20 md:py-28 relative"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="sertifikasi" className="border-b border-[#DDD9CD] py-16 md:py-24 bg-[#EFECE3]">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <Reveal animation="fade-down">
-            <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full bg-[#4A7FA7]/15 border border-[#4A7FA7]/30 text-[#60A5FA]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA]" />
-              Kredensial Profesional
-            </span>
-          </Reveal>
-
-          <Reveal animation="fade-up" delay={150}>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mt-3 mb-4 tracking-tight text-[#F6FAFD]">
-              Sertifikat &amp; Bootcamp
-            </h2>
-            <p className="text-base sm:text-lg text-[#B3CFE5]">
-              Bukti kompetensi terstruktur dan validasi keahlian di bidang pengembangan web serta manajemen basis data.
-            </p>
-          </Reveal>
+        {/* ── Section Index Header ── */}
+        <div className="grid grid-cols-12 pb-6 mb-12 border-b border-[#DDD9CD] text-[11px] font-mono-swiss text-[#585752]">
+          <div className="col-span-12 sm:col-span-4 flex items-center gap-2">
+            <span className="w-2 h-2 bg-[#D84227]" />
+            <span>SEC. 06 — KREDENSIAL &amp; VALIDASI PROFESIONAL</span>
+          </div>
+          <div className="col-span-12 sm:col-span-8 sm:text-right mt-1 sm:mt-0 text-[#87857E]">
+            SERTIFIKASI TERVERIFIKASI // ARCHIVE
+          </div>
         </div>
 
-        {/* Certificates Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        {/* Section Title */}
+        <div className="grid grid-cols-12 gap-8 mb-16">
+          <div className="col-span-12 lg:col-span-6">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#121212] tracking-[-0.03em] leading-tight">
+              Sertifikasi &amp; Kurikulum Terakreditasi.
+            </h2>
+          </div>
+          <div className="col-span-12 lg:col-span-6 flex flex-col justify-end">
+            <p className="font-body text-base text-[#585752] leading-relaxed max-w-2xl">
+              Bukti kompetensi terstruktur dan validasi keahlian di bidang pengembangan web, rekayasa data analitis, dan produktivitas digital.
+            </p>
+          </div>
+        </div>
+
+        {/* ── Certificates Grid (0px Radius, Swiss Monograph Frame) ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {certificatesData.map((cert, idx) => (
-            <Reveal
+            <div
               key={cert.id}
-              animation="fade-up"
-              delay={idx * 140}
+              className="editorial-row border border-[#DDD9CD] bg-[#F5F3EC] p-8 flex flex-col justify-between"
             >
-              <div
-                className="h-full rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-400 group hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(74,127,167,0.22)] bg-gradient-to-b from-[#1A3D63]/70 via-[#132d4a]/75 to-[#0b1c31]/85 backdrop-blur-xl border border-[#4A7FA7]/25 hover:border-[#60A5FA]/60"
-              >
-                <div>
-                  {/* Header */}
-                  <div className="flex items-center justify-between mb-5">
-                    <div
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 bg-[#0A1931]/70 border border-[#4A7FA7]/30 text-[#60A5FA] shadow-inner"
-                    >
-                      <IconAward className="w-7 h-7" />
-                    </div>
-                    <span className="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#0A1931]/60 text-[#B3CFE5] border border-[#4A7FA7]/25">
-                      {cert.year}
-                    </span>
-                  </div>
-
-                  {(cert.status || cert.idCredential) && (
-                    <div className="flex items-center gap-2 mb-3">
-                      {cert.status && (
-                        <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full text-[#60A5FA] bg-[#4A7FA7]/15 border border-[#4A7FA7]/30">
-                          <IconCheckCircle className="w-3.5 h-3.5 text-emerald-400" />
-                          {cert.status}
-                        </span>
-                      )}
-                      {cert.idCredential && (
-                        <span className="text-xs font-mono text-[#B3CFE5]/80 px-2.5 py-1 rounded-md bg-[#0A1931]/40 border border-[#4A7FA7]/20">
-                          ID: {cert.idCredential}
-                        </span>
-                      )}
-                    </div>
-                  )}
-
-                  <h3 className="text-xl sm:text-2xl font-bold mb-1.5 text-[#F6FAFD] group-hover:text-sky-300 transition-colors">
-                    {cert.title}
-                  </h3>
-                  <p className="text-sm font-semibold mb-3 text-[#60A5FA]">
-                    {cert.issuer}
-                  </p>
-                  <p className="text-sm sm:text-base leading-relaxed mb-6 text-[#B3CFE5]/90">
-                    {cert.description}
-                  </p>
+              <div>
+                {/* Meta Top Bar */}
+                <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#DDD9CD] font-mono-swiss text-[11px]">
+                  <span className="text-[#D84227] font-semibold">
+                    CERT.0{idx + 1} // {cert.year}
+                  </span>
+                  <span className="text-[#87857E]">
+                    ISSUER: {cert.issuer.toUpperCase()}
+                  </span>
                 </div>
 
+                <h3 className="font-display text-2xl font-bold text-[#121212] mb-3">
+                  {cert.title}
+                </h3>
+
+                <p className="font-body text-sm text-[#585752] leading-relaxed mb-6">
+                  {cert.description}
+                </p>
+
+                {/* Certificate Image Frame */}
                 {cert.image && (
-                  <div className="overflow-hidden rounded-2xl mb-5 border border-[#4A7FA7]/30 shadow-lg">
+                  <div className="border border-[#DDD9CD] mb-6 overflow-hidden bg-[#DDD9CD]">
                     <img
                       src={cert.image}
                       alt={cert.title}
-                      className="w-full h-72 sm:h-80 object-cover group-hover:scale-104 transition-transform duration-500 ease-out"
+                      className="w-full h-64 object-cover filter contrast-105 hover:contrast-100 transition-all"
                     />
                   </div>
                 )}
+              </div>
 
-                {/* Tags & Verify */}
-                <div className="pt-4 space-y-4 border-t border-[#4A7FA7]/15">
-                  <div className="flex flex-wrap gap-1.5">
-                    {cert.skills.map((skill, sIdx) => (
-                      <span
-                        key={sIdx}
-                        className="text-xs font-medium px-3 py-1 rounded-full bg-[#0A1931]/50 text-[#93C5FD] border border-[#4A7FA7]/20"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-
-                  {cert.idCredential && (
-                    <button
-                      type="button"
-                      onClick={() => setSelectedCert(cert)}
-                      className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer text-[#60A5FA] hover:text-sky-300 group/btn"
+              {/* Skills and Link */}
+              <div className="pt-6 border-t border-[#DDD9CD] space-y-4">
+                <div className="flex flex-wrap gap-1.5">
+                  {cert.skills.map((skill, sIdx) => (
+                    <span
+                      key={sIdx}
+                      className="font-mono-swiss text-[10px] px-2 py-0.5 bg-[#EFECE3] border border-[#DDD9CD] text-[#121212]"
                     >
-                      Lihat Kredensial Asli
-                      <IconExternalLink className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5" />
-                    </button>
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex items-center justify-between pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedCert(cert)}
+                    className="font-mono-swiss text-xs tracking-[0.08em] font-semibold text-[#121212] border-b border-[#121212] pb-0.5 hover:text-[#D84227] hover:border-[#D84227] transition-colors cursor-pointer"
+                  >
+                    DETAIL KREDENSIAL →
+                  </button>
+
+                  {cert.verifyUrl && (
+                    <a
+                      href={cert.verifyUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-mono-swiss text-[11px] text-[#585752] hover:text-[#121212] flex items-center gap-1 transition-colors"
+                    >
+                      <span>VERIFIKASI RESMI</span>
+                      <IconExternalLink className="w-3.5 h-3.5" />
+                    </a>
                   )}
                 </div>
               </div>
-            </Reveal>
+
+            </div>
           ))}
         </div>
 
@@ -128,68 +118,68 @@ export default function Certificates() {
       {/* ── Modal Preview Kredensial ── */}
       {selectedCert && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-black/60 animate-fadeIn"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#121212]/70"
           onClick={() => setSelectedCert(null)}
         >
           <div
-            className="max-w-lg w-full p-7 sm:p-9 relative text-center rounded-3xl bg-[#0d2238]/95 border border-[#4A7FA7]/40 shadow-[0_25px_80px_rgba(0,0,0,0.8)]"
+            className="max-w-xl w-full p-8 sm:p-10 bg-[#F5F3EC] border-2 border-[#121212] relative"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               type="button"
               onClick={() => setSelectedCert(null)}
-              className="absolute top-5 right-5 p-2 rounded-xl transition-all hover:scale-110 cursor-pointer text-[#B3CFE5] hover:text-white bg-[#0A1931]/60 border border-[#4A7FA7]/30"
+              className="absolute top-6 right-6 p-2 border border-[#DDD9CD] hover:border-[#121212] text-[#121212] transition-colors cursor-pointer bg-[#EFECE3]"
             >
               <IconX className="w-5 h-5" />
             </button>
 
-            <div
-              className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5 bg-[#0A1931]/80 border-2 border-[#60A5FA] text-[#60A5FA] shadow-[0_0_20px_rgba(96,165,250,0.3)]"
-            >
-              <IconAward className="w-8 h-8" />
-            </div>
+            <span className="font-mono-swiss text-xs font-semibold text-[#D84227] block mb-2">
+              VERIFIKASI SERTIFIKASI // {selectedCert.year}
+            </span>
 
-            <h3 className="text-xl sm:text-2xl font-bold mb-2 text-[#F6FAFD]">
+            <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-[#121212] mb-3">
               {selectedCert.title}
             </h3>
-            <p className="text-sm font-semibold mb-4 text-[#60A5FA]">
-              {selectedCert.issuer} ({selectedCert.year})
+
+            <p className="font-mono-swiss text-xs text-[#585752] mb-6">
+              PENERBIT: {selectedCert.issuer.toUpperCase()} ({selectedCert.year})
             </p>
 
-            <div className="p-4 rounded-2xl mb-6 text-left space-y-2 bg-[#0A1931]/70 border border-[#4A7FA7]/25">
-              <div className="flex justify-between text-xs sm:text-sm">
-                <span className="text-[#B3CFE5]">ID Kredensial:</span>
-                <span className="font-mono text-[#F6FAFD]">{selectedCert.idCredential}</span>
+            <div className="border border-[#DDD9CD] p-4 bg-[#EFECE3] mb-6 font-mono-swiss text-xs space-y-2 text-[#585752]">
+              <div className="flex justify-between">
+                <span>STATUS VERIFIKASI:</span>
+                <span className="text-[#2E6930] font-semibold">VALID // TERVERIFIKASI</span>
               </div>
-              <div className="flex justify-between text-xs sm:text-sm">
-                <span className="text-[#B3CFE5]">Status Verifikasi:</span>
-                <span className="font-semibold text-emerald-400 flex items-center gap-1">
-                  <IconCheckCircle className="w-3.5 h-3.5" />
-                  Terverifikasi
-                </span>
-              </div>
+              {selectedCert.idCredential && (
+                <div className="flex justify-between">
+                  <span>ID KREDENSIAL:</span>
+                  <span className="text-[#121212]">{selectedCert.idCredential}</span>
+                </div>
+              )}
             </div>
 
-            <div className="flex items-center justify-center gap-3">
+            <div className="flex items-center justify-between border-t border-[#121212] pt-6">
               <button
                 type="button"
                 onClick={() => setSelectedCert(null)}
-                className="px-6 py-2.5 text-sm font-semibold rounded-xl transition-colors cursor-pointer text-[#B3CFE5] hover:text-white bg-[#0A1931]/60"
+                className="font-mono-swiss text-xs tracking-[0.08em] text-[#585752] hover:text-[#121212] cursor-pointer"
               >
-                Tutup
+                [ TUTUP ]
               </button>
+
               {selectedCert.verifyUrl && (
                 <a
                   href={selectedCert.verifyUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 hover:scale-105 bg-gradient-to-r from-[#4A7FA7] to-[#2563EB] text-white shadow-lg"
+                  className="font-mono-swiss text-xs tracking-[0.08em] px-5 py-2.5 bg-[#121212] text-[#F5F3EC] hover:bg-[#D84227] transition-colors flex items-center gap-2"
                 >
-                  Buka Web Penerbit
-                  <IconExternalLink className="w-4 h-4" />
+                  <span>BUKA LINK PENERBIT →</span>
+                  <IconExternalLink className="w-3.5 h-3.5" />
                 </a>
               )}
             </div>
+
           </div>
         </div>
       )}

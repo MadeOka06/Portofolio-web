@@ -1,79 +1,61 @@
-import {
-  IconUsers,
-  IconPuzzle,
-  IconMessageSquare,
-  IconClock,
-  IconTarget,
-  IconLightbulb,
-} from '../common/Icons';
 import { softSkillsData } from '../../data/portfolioData';
-import Reveal from '../common/Reveal';
 
 export default function SoftSkills() {
-  const renderIcon = (iconName?: string) => {
-    const cls = "w-6 h-6";
-    const style = { color: '#60A5FA' };
-    switch (iconName) {
-      case 'users':     return <IconUsers className={cls} style={style} />;
-      case 'puzzle':    return <IconPuzzle className={cls} style={style} />;
-      case 'chat':      return <IconMessageSquare className={cls} style={style} />;
-      case 'clock':     return <IconClock className={cls} style={style} />;
-      case 'target':    return <IconTarget className={cls} style={style} />;
-      case 'lightbulb':
-      default:          return <IconLightbulb className={cls} style={style} />;
-    }
-  };
-
   return (
-    <section
-      id="soft-skills"
-      className="py-20 md:py-24 relative"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="soft-skills" className="border-b border-[#DDD9CD] py-16 md:py-24 bg-[#EFECE3]">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <Reveal animation="fade-down">
-            <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full bg-[#4A7FA7]/15 border border-[#4A7FA7]/30 text-[#60A5FA]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA]" />
-              Kompetensi Interpersonal
-            </span>
-          </Reveal>
-
-          <Reveal animation="fade-up" delay={150}>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mt-3 mb-4 tracking-tight text-[#F6FAFD]">
-              Soft Skills &amp; Kepribadian
-            </h2>
-            <p className="text-base sm:text-lg text-[#B3CFE5]">
-              Keterampilan non-teknis yang mendukung kolaborasi produktif, kepemimpinan adaptif, dan eksekusi proyek yang terarah.
-            </p>
-          </Reveal>
+        {/* ── Section Index Header ── */}
+        <div className="grid grid-cols-12 pb-6 mb-12 border-b border-[#DDD9CD] text-[11px] font-mono-swiss text-[#585752]">
+          <div className="col-span-12 sm:col-span-4 flex items-center gap-2">
+            <span className="w-2 h-2 bg-[#D84227]" />
+            <span>SEC. 03 — KOMPETENSI INTERPERSONAL</span>
+          </div>
+          <div className="col-span-12 sm:col-span-8 sm:text-right mt-1 sm:mt-0 text-[#87857E]">
+            DISIPLIN KOMUNIKASI &amp; PERILAKU KERJA
+          </div>
         </div>
 
-        {/* Soft Skills Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Section Title */}
+        <div className="grid grid-cols-12 gap-8 mb-12">
+          <div className="col-span-12 lg:col-span-5">
+            <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-[#121212] tracking-[-0.03em] leading-tight">
+              Etos Kerja &amp; Kolaborasi Tim.
+            </h2>
+          </div>
+          <div className="col-span-12 lg:col-span-7 flex flex-col justify-end">
+            <p className="font-body text-base text-[#585752] leading-relaxed max-w-2xl">
+              Keterampilan non-teknis yang mendukung sinergi produktif, kepemimpinan adaptif, dan eksekusi proyek berstandar profesional.
+            </p>
+          </div>
+        </div>
+
+        {/* ── Swiss Editorial Grid Boxes (0px Radius, Hairline Borders) ── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-[#DDD9CD]">
           {softSkillsData.map((item, idx) => (
-            <Reveal
+            <div
               key={item.id}
-              animation="fade-up"
-              delay={idx * 90}
+              className="editorial-row border-r border-b border-[#DDD9CD] p-6 sm:p-8 bg-[#F5F3EC] flex flex-col justify-between"
             >
-              <div
-                className="h-full rounded-3xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-400 group hover:-translate-y-2 hover:shadow-[0_16px_36px_rgba(74,127,167,0.2)] bg-gradient-to-b from-[#1A3D63]/60 via-[#132c48]/70 to-[#0A1931]/80 backdrop-blur-xl border border-[#4A7FA7]/20 hover:border-[#60A5FA]/50"
-              >
-                <div>
-                  <div className="w-13 h-13 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-300 bg-[#0A1931]/80 border border-[#4A7FA7]/30 shadow-inner">
-                    {renderIcon(item.iconName)}
-                  </div>
-                  <h3 className="text-lg font-bold mb-2.5 text-[#F6FAFD] group-hover:text-sky-300 transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-[#B3CFE5]/85">
-                    {item.description}
-                  </p>
+              <div>
+                <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#DDD9CD]/60 font-mono-swiss text-[11px] text-[#87857E]">
+                  <span>PRINCIPIUM // 0{idx + 1}</span>
+                  <span className="text-[#D84227]">●</span>
                 </div>
+
+                <h3 className="font-display text-xl font-bold text-[#121212] mb-3">
+                  {item.title}
+                </h3>
+
+                <p className="font-body text-sm text-[#585752] leading-relaxed">
+                  {item.description}
+                </p>
               </div>
-            </Reveal>
+
+              <div className="pt-6 mt-6 border-t border-[#DDD9CD]/40 font-mono-swiss text-[10px] text-[#87857E]">
+                KAPASITAS INTERPERSONAL TERUJI
+              </div>
+            </div>
           ))}
         </div>
 

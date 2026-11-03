@@ -4,11 +4,9 @@ import {
   IconGithub,
   IconMail,
   IconPhone,
-  IconCheckCircle,
   IconArrowRight,
 } from '../common/Icons';
 import { contactData, profileData } from '../../data/portfolioData';
-import Reveal from '../common/Reveal';
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
@@ -35,185 +33,215 @@ export default function Contact() {
 
   const contactLinks = [
     {
-      name: 'LinkedIn',
-      value: 'linkedin.com/madeoka',
-      href: contactData.linkedinUrl,
-      icon: <IconLinkedin className="w-5 h-5 text-[#60A5FA]" />,
-    },
-    {
-      name: 'GitHub',
-      value: 'github.com/MadeOka06',
-      href: contactData.githubUrl,
-      icon: <IconGithub className="w-5 h-5 text-[#F6FAFD]" />,
-    },
-    {
-      name: 'Email Pribadi',
+      name: 'EMAIL PRIBADI',
       value: contactData.email,
       href: `mailto:${contactData.email}`,
-      icon: <IconMail className="w-5 h-5 text-[#60A5FA]" />,
+      icon: <IconMail className="w-4 h-4" />,
     },
     {
-      name: 'WhatsApp / Telepon',
+      name: 'WHATSAPP / TELEPON',
       value: contactData.whatsappFormatted,
       href: `https://wa.me/${contactData.whatsappNumber}`,
-      icon: <IconPhone className="w-5 h-5 text-[#60A5FA]" />,
+      icon: <IconPhone className="w-4 h-4" />,
+    },
+    {
+      name: 'LINKEDIN PROFILE',
+      value: 'linkedin.com/madeoka',
+      href: contactData.linkedinUrl,
+      icon: <IconLinkedin className="w-4 h-4" />,
+    },
+    {
+      name: 'GITHUB REPOSITORY',
+      value: 'github.com/MadeOka06',
+      href: contactData.githubUrl,
+      icon: <IconGithub className="w-4 h-4" />,
     },
   ];
 
   return (
-    <section id="kontak" className="py-20 md:py-28 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="kontak" className="pt-16 md:pt-24 bg-[#F5F3EC]">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <Reveal animation="fade-down">
-            <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full bg-[#4A7FA7]/15 border border-[#4A7FA7]/30 text-[#60A5FA]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA]" />
-              Komunikasi &amp; Peluang
-            </span>
-          </Reveal>
-
-          <Reveal animation="fade-up" delay={150}>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mt-3 mb-4 tracking-tight text-[#F6FAFD]">
-              Mari Terhubung &amp; Berkolaborasi!
-            </h2>
-            <p className="text-base sm:text-lg text-[#B3CFE5]">
-              Saya terbuka untuk diskusi peluang magang semester 6, proyek kolaborasi, maupun sekadar bertukar wawasan seputar teknologi.
-            </p>
-          </Reveal>
+        {/* ── Section Index Header ── */}
+        <div className="grid grid-cols-12 pb-6 mb-12 border-b border-[#DDD9CD] text-[11px] font-mono-swiss text-[#585752]">
+          <div className="col-span-12 sm:col-span-4 flex items-center gap-2">
+            <span className="w-2 h-2 bg-[#D84227]" />
+            <span>SEC. 07 — KOMUNIKASI &amp; INISIASI KOLABORASI</span>
+          </div>
+          <div className="col-span-12 sm:col-span-8 sm:text-right mt-1 sm:mt-0 text-[#87857E]">
+            HUBUNGI // PELUANG MAGANG SEMESTER 6
+          </div>
         </div>
 
-        {/* Content Box */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 max-w-6xl mx-auto items-start">
+        {/* ── Main Communication Hub Grid ── */}
+        <div className="grid grid-cols-12 gap-y-12 lg:gap-12 pb-20">
 
-          {/* Kolom Kiri: Kontak */}
-          <div className="lg:col-span-5 space-y-4">
-            <Reveal animation="fade-right" delay={200}>
-              <h3 className="text-2xl font-bold mb-2 text-[#F6FAFD]">
-                Saluran Kontak Langsung
-              </h3>
-              <p className="text-sm sm:text-base mb-6 text-[#B3CFE5]/90">
-                Jangan ragu untuk menghubungi melalui salah satu kanal berikut. Saya biasanya merespons dalam waktu 24 jam.
+          {/* Left Block: Direct Mail & Channels (Cols 1-6) */}
+          <div className="col-span-12 lg:col-span-6 space-y-8 pr-0 lg:pr-8 border-b lg:border-b-0 lg:border-r border-[#DDD9CD] pb-12 lg:pb-0">
+            <div>
+              <span className="font-mono-swiss text-xs text-[#D84227] tracking-[0.1em] block mb-2">
+                SALURAN TERBUKA // RESPONS 24 JAM
+              </span>
+              <h2 className="font-display text-4xl sm:text-5xl font-extrabold text-[#121212] tracking-[-0.035em] leading-[1.05] mb-6">
+                Mari Terhubung dan Berkolaborasi.
+              </h2>
+              <p className="font-body text-base text-[#585752] leading-relaxed max-w-lg mb-8">
+                Terbuka untuk diskusi penempatan magang industri semester 6, pengembangan aplikasi web/mobile, maupun pertukaran wawasan seputar teknologi analitis.
               </p>
+            </div>
 
-              <div className="space-y-3.5">
+            {/* Massive Interactive Mail Link */}
+            <div className="border-t border-b border-[#DDD9CD] py-6">
+              <span className="font-mono-swiss text-[10px] text-[#87857E] block mb-1">
+                KIRIM SUREL LANGSUNG:
+              </span>
+              <a
+                href={`mailto:${contactData.email}`}
+                className="font-display text-2xl sm:text-3xl font-bold text-[#121212] hover:text-[#D84227] transition-colors break-all"
+              >
+                {contactData.email}
+              </a>
+            </div>
+
+            {/* Channel Links Stack */}
+            <div className="space-y-4 pt-2">
+              <span className="font-mono-swiss text-[10px] text-[#87857E] block">
+                KANAL KOMUNIKASI RESMI:
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {contactLinks.map((item, idx) => (
                   <a
                     key={idx}
                     href={item.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-4 p-4.5 rounded-2xl transition-all duration-300 group hover:-translate-y-1 hover:border-[#60A5FA]/60 bg-gradient-to-r from-[#1A3D63]/70 to-[#122b46]/70 border border-[#4A7FA7]/25 shadow-md hover:shadow-[0_10px_25px_rgba(74,127,167,0.2)]"
+                    className="editorial-row border border-[#DDD9CD] p-4 bg-[#EFECE3] hover:border-[#121212] transition-colors flex items-start justify-between"
                   >
-                    <div
-                      className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 bg-[#0A1931]/70 border border-[#4A7FA7]/30 shadow-inner"
-                    >
-                      {item.icon}
-                    </div>
-                    <div className="overflow-hidden">
-                      <p className="text-xs font-semibold uppercase tracking-wider text-[#60A5FA]">
+                    <div>
+                      <p className="font-mono-swiss text-[10px] text-[#87857E]">
                         {item.name}
                       </p>
-                      <p className="text-sm sm:text-base font-bold truncate text-[#F6FAFD] group-hover:text-sky-300 transition-colors">
+                      <p className="font-body text-xs font-semibold text-[#121212] mt-0.5 truncate max-w-[170px]">
                         {item.value}
                       </p>
+                    </div>
+                    <div className="text-[#121212] mt-0.5">
+                      {item.icon}
                     </div>
                   </a>
                 ))}
               </div>
-            </Reveal>
+            </div>
+
+            {/* Academic Office Base */}
+            <div className="border-t border-[#DDD9CD] pt-4 font-mono-swiss text-[11px] text-[#585752] space-y-1">
+              <p className="font-semibold text-[#121212]">LOKASI INSTITUSI:</p>
+              <p>Jurusan Teknologi Informasi — Politeknik Negeri Malang</p>
+              <p className="text-[#87857E]">Jl. Soekarno Hatta No.9, Jatimulyo, Lowokwaru, Malang, Jawa Timur</p>
+            </div>
           </div>
 
-          {/* Kolom Kanan: Form */}
-          <div className="lg:col-span-7">
-            <Reveal animation="fade-left" delay={300}>
-              <div
-                className="rounded-3xl p-7 sm:p-9 bg-gradient-to-b from-[#1A3D63]/75 via-[#132d4a]/75 to-[#0b1c31]/85 backdrop-blur-xl border border-[#4A7FA7]/25 shadow-[0_20px_45px_rgba(10,25,49,0.5)]"
-              >
-                <h3 className="text-2xl font-bold mb-2 text-[#F6FAFD]">
-                  Kirimkan Pesan Terhubung
-                </h3>
-                <p className="text-sm sm:text-base mb-6 text-[#B3CFE5]/90">
-                  Formulir ini secara otomatis memformat pesan Anda dan membuka obrolan langsung via WhatsApp.
+          {/* Right Block: Minimal Single-Line Underline Input Form (Cols 7-12) */}
+          <div className="col-span-12 lg:col-span-6 pl-0 lg:pl-6 space-y-6">
+            <div>
+              <span className="font-mono-swiss text-xs text-[#D84227] tracking-[0.1em] block mb-2">
+                TRANSMISI PESAN INTERAKTIF
+              </span>
+              <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#121212] mb-3">
+                Kirimkan Pesan Terstruktur.
+              </h3>
+              <p className="font-body text-sm text-[#585752] leading-relaxed">
+                Formulir ini memformat pesan Anda secara otomatis dan membuka obrolan langsung via WhatsApp ke nomor saya.
+              </p>
+            </div>
+
+            {submitted ? (
+              <div className="border border-[#2E6930] bg-[#EFECE3] p-8 text-[#2E6930]">
+                <p className="font-mono-swiss text-xs font-semibold tracking-[0.08em] mb-2">
+                  STATUS // BERHASIL DITERUSKAN
                 </p>
-
-                {submitted ? (
-                  <div
-                    className="p-6 rounded-2xl flex items-start gap-3.5 animate-fadeIn bg-emerald-950/40 border border-emerald-500/40 text-emerald-300 shadow-lg"
-                  >
-                    <IconCheckCircle className="w-6 h-6 shrink-0 mt-0.5 text-emerald-400" />
-                    <div>
-                      <h4 className="font-bold text-[#F6FAFD]">Pesan Berhasil Diproses!</h4>
-                      <p className="text-sm mt-1 text-emerald-200/90">
-                        WhatsApp obrolan telah dibuka. Terima kasih telah menghubungi!
-                      </p>
-                    </div>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-5">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider mb-2 text-[#B3CFE5]">
-                          Nama Lengkap
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          placeholder="Masukkan nama Anda"
-                          className="w-full px-4 py-3 rounded-2xl bg-[#0A1931]/60 border border-[#4A7FA7]/30 text-[#F6FAFD] text-sm focus:outline-none focus:border-[#60A5FA] focus:ring-2 focus:ring-[#60A5FA]/30 transition-all placeholder:text-[#B3CFE5]/40"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider mb-2 text-[#B3CFE5]">
-                          Alamat Email
-                        </label>
-                        <input
-                          type="email"
-                          required
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          placeholder="nama@perusahaan.com"
-                          className="w-full px-4 py-3 rounded-2xl bg-[#0A1931]/60 border border-[#4A7FA7]/30 text-[#F6FAFD] text-sm focus:outline-none focus:border-[#60A5FA] focus:ring-2 focus:ring-[#60A5FA]/30 transition-all placeholder:text-[#B3CFE5]/40"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider mb-2 text-[#B3CFE5]">
-                        Pesan atau Peluang Magang
-                      </label>
-                      <textarea
-                        rows={4}
-                        required
-                        value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        placeholder="Ceritakan proyek, topik kolaborasi, atau kriteria magang semester 6 Anda di sini..."
-                        className="w-full px-4 py-3 rounded-2xl bg-[#0A1931]/60 border border-[#4A7FA7]/30 text-[#F6FAFD] text-sm focus:outline-none focus:border-[#60A5FA] focus:ring-2 focus:ring-[#60A5FA]/30 transition-all placeholder:text-[#B3CFE5]/40 resize-y"
-                      />
-                    </div>
-
-                    <button
-                      type="submit"
-                      className="btn-shimmer w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl font-semibold text-sm transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer bg-gradient-to-r from-[#4A7FA7] to-[#2563EB] text-white shadow-[0_8px_25px_rgba(37,99,235,0.4)]"
-                    >
-                      Kirim Pesan via WhatsApp
-                      <IconArrowRight className="w-4 h-4" />
-                    </button>
-                  </form>
-                )}
+                <p className="font-body text-sm text-[#121212]">
+                  WhatsApp obrolan telah dibuka. Terima kasih telah menghubungi!
+                </p>
               </div>
-            </Reveal>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-8 pt-4">
+                {/* Single-Line Underline Inputs */}
+                <div className="space-y-6">
+                  <div>
+                    <label className="block font-mono-swiss text-[10px] text-[#87857E] mb-2">
+                      NAMA LENGKAP PENGIRIM *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="e.g. Nama Anda atau Instansi"
+                      className="underline-input w-full py-2 font-mono-swiss text-xs placeholder:text-[#87857E]/50"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block font-mono-swiss text-[10px] text-[#87857E] mb-2">
+                      ALAMAT SUREL / EMAIL *
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      placeholder="e.g. nama@perusahaan.com"
+                      className="underline-input w-full py-2 font-mono-swiss text-xs placeholder:text-[#87857E]/50"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block font-mono-swiss text-[10px] text-[#87857E] mb-2">
+                      PESAN ATAU SPESIFIKASI PELUANG MAGANG *
+                    </label>
+                    <textarea
+                      rows={4}
+                      required
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      placeholder="Ceritakan proyek, topik kolaborasi, atau kriteria magang semester 6..."
+                      className="underline-input w-full py-2 font-mono-swiss text-xs placeholder:text-[#87857E]/50 resize-y"
+                    />
+                  </div>
+                </div>
+
+                {/* Inline Submission Action */}
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    className="font-mono-swiss text-xs tracking-[0.08em] font-semibold px-8 py-4 bg-[#121212] text-[#F5F3EC] hover:bg-[#D84227] transition-colors flex items-center gap-3 cursor-pointer"
+                  >
+                    <span>KIRIM VIA WHATSAPP</span>
+                    <IconArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
+
         </div>
+
       </div>
 
-      {/* Footer */}
-      <footer className="mt-20 pt-8 text-center border-t border-[#4A7FA7]/15">
-        <p className="text-sm font-medium text-[#B3CFE5]/80">
-          &copy; {new Date().getFullYear()} {profileData.name}. Dibuat dengan penuh dedikasi 💙
-        </p>
+      {/* ── Swiss Colophon Bar (Utility Footer with Distributed Metadata) ── */}
+      <footer className="border-t border-[#DDD9CD] bg-[#EFECE3] py-6">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-3 gap-4 items-center font-mono-swiss text-[10px] text-[#585752]">
+          <div>
+            &copy; {new Date().getFullYear()} {profileData.name.toUpperCase()}. ALL RIGHTS RESERVED.
+          </div>
+          <div className="sm:text-center text-[#87857E]">
+            GRID SPEC: C12:R∞ // 0PX RADIUS
+          </div>
+          <div className="sm:text-right text-[#87857E]">
+            SET IN FRAUNCES, INTER &amp; IBM PLEX MONO
+          </div>
+        </div>
       </footer>
     </section>
   );
