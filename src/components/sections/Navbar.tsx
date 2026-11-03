@@ -15,11 +15,19 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('beranda');
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
+      // Progress calculation
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        setScrollProgress((window.scrollY / totalHeight) * 100);
+      }
+
+      // ScrollSpy
       const sections = navLinks.map((item) => document.getElementById(item.id));
-      const scrollPosition = window.scrollY + 180;
+      const scrollPosition = window.scrollY + 140;
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
         if (section && section.offsetTop <= scrollPosition) {
@@ -91,22 +99,12 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* ── Metadata Ribbon Bar (Strict Swiss Monograph Divider) ── */}
-      <div className="border-t border-[#DDD9CD] bg-[#EFECE3] hidden md:block">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-1.5 grid grid-cols-12 text-[10px] font-mono-swiss text-[#585752]">
-          <div className="col-span-3 border-r border-[#DDD9CD] pr-4">
-            PROGRAM: {profileData.education.toUpperCase()}
-          </div>
-          <div className="col-span-4 border-r border-[#DDD9CD] px-4">
-            INSTITUSI: {profileData.campus.toUpperCase()}
-          </div>
-          <div className="col-span-3 border-r border-[#DDD9CD] px-4">
-            BIDANG: {profileData.role.toUpperCase()}
-          </div>
-          <div className="col-span-2 pl-4 text-right">
-            STATUS: AKTIF // MAGANG S6
-          </div>
-        </div>
+      {/* ── Slide-Down Reading Progress Line (Swiss Terracotta) ── */}
+      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-transparent overflow-hidden">
+        <div
+          className="h-full bg-[#D84227] transition-all duration-150 ease-out"
+          style={{ width: `${scrollProgress}%` }}
+        />
       </div>
 
       {/* ── Mobile Menu Dropdown ── */}

@@ -19,7 +19,7 @@ export default function Hero() {
   return (
     <section
       id="beranda"
-      className="relative border-b border-[#DDD9CD] pt-28 md:pt-36 pb-16 md:pb-24"
+      className="relative border-b border-[#DDD9CD] pt-24 md:pt-32 pb-16 md:pb-24"
     >
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
 

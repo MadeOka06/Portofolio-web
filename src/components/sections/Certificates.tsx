@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { IconExternalLink, IconX } from '../common/Icons';
 import { certificatesData } from '../../data/portfolioData';
 import type { CertificateItem } from '../../types';
+import Reveal from '../common/Reveal';
 
 export default function Certificates() {
   const [selectedCert, setSelectedCert] = useState<CertificateItem | null>(null);
@@ -11,105 +12,110 @@ export default function Certificates() {
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ── Section Index Header ── */}
-        <div className="grid grid-cols-12 pb-6 mb-12 border-b border-[#DDD9CD] text-[11px] font-mono-swiss text-[#585752]">
-          <div className="col-span-12 sm:col-span-4 flex items-center gap-2">
-            <span className="w-2 h-2 bg-[#D84227]" />
-            <span>SEC. 06 — KREDENSIAL &amp; VALIDASI PROFESIONAL</span>
+        <Reveal animation="fade-down">
+          <div className="grid grid-cols-12 pb-6 mb-12 border-b border-[#DDD9CD] text-[11px] font-mono-swiss text-[#585752]">
+            <div className="col-span-12 sm:col-span-4 flex items-center gap-2">
+              <span className="w-2 h-2 bg-[#D84227]" />
+              <span>SEC. 06 — KREDENSIAL &amp; VALIDASI PROFESIONAL</span>
+            </div>
+            <div className="col-span-12 sm:col-span-8 sm:text-right mt-1 sm:mt-0 text-[#87857E]">
+              SERTIFIKASI TERVERIFIKASI // ARCHIVE
+            </div>
           </div>
-          <div className="col-span-12 sm:col-span-8 sm:text-right mt-1 sm:mt-0 text-[#87857E]">
-            SERTIFIKASI TERVERIFIKASI // ARCHIVE
-          </div>
-        </div>
+        </Reveal>
 
         {/* Section Title */}
-        <div className="grid grid-cols-12 gap-8 mb-16">
-          <div className="col-span-12 lg:col-span-6">
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#121212] tracking-[-0.03em] leading-tight">
-              Sertifikasi &amp; Kurikulum Terakreditasi.
-            </h2>
+        <Reveal animation="fade-up" delay={100}>
+          <div className="grid grid-cols-12 gap-8 mb-16">
+            <div className="col-span-12 lg:col-span-6">
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#121212] tracking-[-0.03em] leading-tight">
+                Sertifikasi &amp; Kurikulum Terakreditasi.
+              </h2>
+            </div>
+            <div className="col-span-12 lg:col-span-6 flex flex-col justify-end">
+              <p className="font-body text-base text-[#585752] leading-relaxed max-w-2xl">
+                Bukti kompetensi terstruktur dan validasi keahlian di bidang pengembangan web, rekayasa data analitis, dan produktivitas digital.
+              </p>
+            </div>
           </div>
-          <div className="col-span-12 lg:col-span-6 flex flex-col justify-end">
-            <p className="font-body text-base text-[#585752] leading-relaxed max-w-2xl">
-              Bukti kompetensi terstruktur dan validasi keahlian di bidang pengembangan web, rekayasa data analitis, dan produktivitas digital.
-            </p>
-          </div>
-        </div>
+        </Reveal>
 
-        {/* ── Certificates Grid (0px Radius, Swiss Monograph Frame) ── */}
+        {/* ── Certificates Grid with Scroll Reveal ── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {certificatesData.map((cert, idx) => (
-            <div
-              key={cert.id}
-              className="editorial-row border border-[#DDD9CD] bg-[#F5F3EC] p-8 flex flex-col justify-between"
-            >
-              <div>
-                {/* Meta Top Bar */}
-                <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#DDD9CD] font-mono-swiss text-[11px]">
-                  <span className="text-[#D84227] font-semibold">
-                    CERT.0{idx + 1} // {cert.year}
-                  </span>
-                  <span className="text-[#87857E]">
-                    ISSUER: {cert.issuer.toUpperCase()}
-                  </span>
-                </div>
-
-                <h3 className="font-display text-2xl font-bold text-[#121212] mb-3">
-                  {cert.title}
-                </h3>
-
-                <p className="font-body text-sm text-[#585752] leading-relaxed mb-6">
-                  {cert.description}
-                </p>
-
-                {/* Certificate Image Frame */}
-                {cert.image && (
-                  <div className="border border-[#DDD9CD] mb-6 overflow-hidden bg-[#DDD9CD]">
-                    <img
-                      src={cert.image}
-                      alt={cert.title}
-                      className="w-full h-64 object-cover filter contrast-105 hover:contrast-100 transition-all"
-                    />
-                  </div>
-                )}
-              </div>
-
-              {/* Skills and Link */}
-              <div className="pt-6 border-t border-[#DDD9CD] space-y-4">
-                <div className="flex flex-wrap gap-1.5">
-                  {cert.skills.map((skill, sIdx) => (
-                    <span
-                      key={sIdx}
-                      className="font-mono-swiss text-[10px] px-2 py-0.5 bg-[#EFECE3] border border-[#DDD9CD] text-[#121212]"
-                    >
-                      {skill}
+            <Reveal key={cert.id} animation="fade-up" delay={idx * 100}>
+              <div
+                className="editorial-row border border-[#DDD9CD] bg-[#F5F3EC] p-8 flex flex-col justify-between h-full group"
+              >
+                <div>
+                  {/* Meta Top Bar */}
+                  <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#DDD9CD] font-mono-swiss text-[11px]">
+                    <span className="text-[#D84227] font-semibold">
+                      CERT.0{idx + 1} // {cert.year}
                     </span>
-                  ))}
-                </div>
+                    <span className="text-[#87857E]">
+                      ISSUER: {cert.issuer.toUpperCase()}
+                    </span>
+                  </div>
 
-                <div className="flex items-center justify-between pt-2">
-                  <button
-                    type="button"
-                    onClick={() => setSelectedCert(cert)}
-                    className="font-mono-swiss text-xs tracking-[0.08em] font-semibold text-[#121212] border-b border-[#121212] pb-0.5 hover:text-[#D84227] hover:border-[#D84227] transition-colors cursor-pointer"
-                  >
-                    DETAIL KREDENSIAL →
-                  </button>
+                  <h3 className="font-display text-2xl font-bold text-[#121212] mb-3 group-hover:text-[#D84227] transition-colors">
+                    {cert.title}
+                  </h3>
 
-                  {cert.verifyUrl && (
-                    <a
-                      href={cert.verifyUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="font-mono-swiss text-[11px] text-[#585752] hover:text-[#121212] flex items-center gap-1 transition-colors"
-                    >
-                      <span>VERIFIKASI RESMI</span>
-                      <IconExternalLink className="w-3.5 h-3.5" />
-                    </a>
+                  <p className="font-body text-sm text-[#585752] leading-relaxed mb-6">
+                    {cert.description}
+                  </p>
+
+                  {/* Certificate Image Frame */}
+                  {cert.image && (
+                    <div className="border border-[#DDD9CD] mb-6 overflow-hidden bg-[#DDD9CD]">
+                      <img
+                        src={cert.image}
+                        alt={cert.title}
+                        className="w-full h-64 object-cover filter contrast-105 hover:contrast-100 transition-all duration-300"
+                      />
+                    </div>
                   )}
                 </div>
-              </div>
 
-            </div>
+                {/* Skills and Link */}
+                <div className="pt-6 border-t border-[#DDD9CD] space-y-4">
+                  <div className="flex flex-wrap gap-1.5">
+                    {cert.skills.map((skill, sIdx) => (
+                      <span
+                        key={sIdx}
+                        className="font-mono-swiss text-[10px] px-2 py-0.5 bg-[#EFECE3] border border-[#DDD9CD] text-[#121212]"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center justify-between pt-2">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedCert(cert)}
+                      className="font-mono-swiss text-xs tracking-[0.08em] font-semibold text-[#121212] border-b border-[#121212] pb-0.5 hover:text-[#D84227] hover:border-[#D84227] transition-colors cursor-pointer"
+                    >
+                      DETAIL KREDENSIAL →
+                    </button>
+
+                    {cert.verifyUrl && (
+                      <a
+                        href={cert.verifyUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-mono-swiss text-[11px] text-[#585752] hover:text-[#121212] flex items-center gap-1 transition-colors"
+                      >
+                        <span>VERIFIKASI RESMI</span>
+                        <IconExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+
+              </div>
+            </Reveal>
           ))}
         </div>
 

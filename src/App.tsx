@@ -65,21 +65,6 @@ export default function App() {
     <ErrorBoundary>
       <div className="min-h-screen relative bg-[#F5F3EC] text-[#121212] overflow-x-hidden selection:bg-[#121212] selection:text-[#F5F3EC]">
 
-        {/* ── Exposed 12-Column Structural Grid Backdrop ── */}
-        <div
-          className="pointer-events-none fixed inset-0 z-0 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-12"
-          aria-hidden="true"
-        >
-          {Array.from({ length: 12 }).map((_, i) => (
-            <div
-              key={i}
-              className={`h-full border-r ${
-                i === 0 ? 'border-l border-[#DDD9CD]/40' : ''
-              } border-[#DDD9CD]/40`}
-            />
-          ))}
-        </div>
-
         {/* ── Fixed Swiss Top Bar (stays fixed while scrolling) ── */}
         <Navbar />
 
