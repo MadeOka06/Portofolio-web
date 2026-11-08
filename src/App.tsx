@@ -48,10 +48,15 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
 export default function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const checkScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
       setShowScrollTop(window.scrollY > 400);
+      if (totalHeight > 0) {
+        setScrollProgress((window.scrollY / totalHeight) * 100);
+      }
     };
     window.addEventListener('scroll', checkScroll, { passive: true });
     return () => window.removeEventListener('scroll', checkScroll);
@@ -79,20 +84,32 @@ export default function App() {
           <Contact />
         </main>
 
+        {/* ── Vertical Scroll Progress Rail (right edge) ── */}
+        <div className="fixed right-0 top-0 bottom-0 w-[3px] z-40 bg-[#DDD9CD]/40 pointer-events-none">
+          <div
+            className="w-full bg-[#D84227] transition-all duration-100 ease-out"
+            style={{ height: `${scrollProgress}%` }}
+          />
+        </div>
+
         {/* ── Sharp Minimalist Scroll-to-Top Button ── */}
-        {showScrollTop && (
-          <button
-            type="button"
-            onClick={scrollToTop}
-            className="fixed bottom-6 right-6 z-40 p-3 bg-[#F5F3EC] border border-[#121212] text-[#121212] hover:bg-[#121212] hover:text-[#F5F3EC] cursor-pointer transition-colors"
-            aria-label="Kembali ke atas"
-            title="Kembali ke atas"
-          >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-            </svg>
-          </button>
-        )}
+        <button
+          type="button"
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 z-40 p-3 bg-[#F5F3EC] border border-[#121212] text-[#121212] hover:bg-[#121212] hover:text-[#F5F3EC] cursor-pointer transition-all duration-300"
+          aria-label="Kembali ke atas"
+          title="Kembali ke atas"
+          style={{
+            opacity: showScrollTop ? 1 : 0,
+            transform: showScrollTop ? 'translateY(0) scale(1)' : 'translateY(12px) scale(0.9)',
+            pointerEvents: showScrollTop ? 'auto' : 'none',
+            transition: 'opacity 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1), background-color 0.2s ease, color 0.2s ease',
+          }}
+        >
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="square" strokeLinejoin="miter" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+          </svg>
+        </button>
 
       </div>
     </ErrorBoundary>

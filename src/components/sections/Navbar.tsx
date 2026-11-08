@@ -16,6 +16,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('beranda');
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +25,9 @@ export default function Navbar() {
       if (totalHeight > 0) {
         setScrollProgress((window.scrollY / totalHeight) * 100);
       }
+
+      // Navbar shrink on scroll
+      setScrolled(window.scrollY > 30);
 
       // ScrollSpy
       const sections = navLinks.map((item) => document.getElementById(item.id));
@@ -42,9 +46,9 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 w-full bg-[#F5F3EC] border-b border-[#DDD9CD]">
+    <header className={`fixed top-0 left-0 right-0 z-50 w-full border-b border-[#DDD9CD] transition-all duration-500 ease-out ${scrolled ? 'bg-[#F5F3EC]/95 backdrop-blur-sm h-12' : 'bg-[#F5F3EC] h-auto'}`}>
       {/* ── Main Top Bar ── */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+      <div className={`max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between transition-all duration-500 ease-out ${scrolled ? 'h-12' : 'h-14'}`}>
 
         {/* Wordmark & Folio */}
         <div className="flex items-center gap-4">
@@ -52,11 +56,9 @@ export default function Navbar() {
             href="#beranda"
             className="font-mono-swiss text-xs sm:text-sm font-semibold tracking-[0.1em] text-[#121212] hover:opacity-70 transition-opacity"
           >
-            {profileData.name.toUpperCase()}
+            {profileData.shortname.toUpperCase()}
           </a>
-          <span className="hidden sm:inline-block font-mono-swiss text-[11px] text-[#87857E] border-l border-[#DDD9CD] pl-4">
-            FOLIO // 2026
-          </span>
+
         </div>
 
         {/* Desktop Editorial Navigation */}

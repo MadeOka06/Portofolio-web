@@ -1,4 +1,4 @@
-  import type {
+import type {
   ProfileData,
   SkillCategory,
   SoftSkillItem,
@@ -6,8 +6,8 @@
   ProjectItem,
   CertificateItem,
   ContactInfo,
-
 } from '../types';
+import profileAvatar from '../assets/DSC03018.jpg';
 
 export const profileData: ProfileData = {
   name: 'I Gusti Agung Made Oka Darmestha',
@@ -15,14 +15,13 @@ export const profileData: ProfileData = {
   role: 'Web Developer & Data Enthusiast',
   roles: [
     'Web Developer',
-    'Mobile App Enthusiast',
+    'Quality Assurance',
     'Data Analyst',
   ],
   education: 'Mahasiswa Semester 5 Teknologi Informasi',
   campus: 'Politeknik Negeri Malang (POLINEMA)',
   bio: 'Seorang mahasiswa IT yang memiliki minat besar dalam Web Development, Aplikasi Mobile, dan Analisis Data. Saat ini sedang mencari peluang magang (internship) di semester 6 guna menerapkan keahlian teknis saya dan berkontribusi pada proyek industri yang nyata.',
-  avatarUrl:
-    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=700&fit=crop',
+  avatarUrl: profileAvatar,
   resumeUrl: '/resume.pdf',
   metrics: {
     semester: 'Semester 5',

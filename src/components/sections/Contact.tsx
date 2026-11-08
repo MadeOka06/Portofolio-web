@@ -1,61 +1,37 @@
-import React, { useState } from 'react';
 import {
   IconLinkedin,
   IconGithub,
   IconMail,
   IconPhone,
-  IconArrowRight,
 } from '../common/Icons';
 import { contactData, profileData } from '../../data/portfolioData';
 import Reveal from '../common/Reveal';
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) return;
-
-    const messageText = `Halo Dinar,%0A%0ASaya *${encodeURIComponent(
-      formData.name
-    )}* (${encodeURIComponent(formData.email)}).%0A%0A*Pesan / Penawaran Magang:*%0A${encodeURIComponent(
-      formData.message
-    )}`;
-    const waUrl = `https://wa.me/${contactData.whatsappNumber}?text=${messageText}`;
-    window.open(waUrl, '_blank');
-
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: '', email: '', message: '' });
-    }, 6000);
-  };
-
   const contactLinks = [
     {
       name: 'EMAIL PRIBADI',
       value: contactData.email,
       href: `mailto:${contactData.email}`,
-      icon: <IconMail className="w-4 h-4" />,
+      icon: <IconMail className="w-5 h-5" />,
     },
     {
       name: 'WHATSAPP / TELEPON',
       value: contactData.whatsappFormatted,
       href: `https://wa.me/${contactData.whatsappNumber}`,
-      icon: <IconPhone className="w-4 h-4" />,
+      icon: <IconPhone className="w-5 h-5" />,
     },
     {
       name: 'LINKEDIN PROFILE',
       value: 'linkedin.com/madeoka',
       href: contactData.linkedinUrl,
-      icon: <IconLinkedin className="w-4 h-4" />,
+      icon: <IconLinkedin className="w-5 h-5" />,
     },
     {
       name: 'GITHUB REPOSITORY',
       value: 'github.com/MadeOka06',
       href: contactData.githubUrl,
-      icon: <IconGithub className="w-4 h-4" />,
+      icon: <IconGithub className="w-5 h-5" />,
     },
   ];
 
@@ -76,162 +52,86 @@ export default function Contact() {
           </div>
         </Reveal>
 
-        {/* ── Main Communication Hub Grid with Scroll Reveal ── */}
-        <div className="grid grid-cols-12 gap-y-12 lg:gap-12 pb-20">
+        {/* ── Main Communication Hub with Scroll Reveal ── */}
+        <div className="pb-20 max-w-5xl mx-auto space-y-10">
+          <Reveal animation="fade-up" delay={100}>
+            <div className="text-center max-w-2xl mx-auto space-y-4">
+              <span className="font-mono-swiss text-xs text-[#D84227] tracking-[0.1em] block">
+                SALURAN TERBUKA // RESPONS 24 JAM
+              </span>
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#121212] tracking-[-0.035em] leading-[1.05]">
+                Mari Terhubung dan Berkolaborasi.
+              </h2>
+              <p className="font-body text-base sm:text-lg text-[#585752] leading-relaxed">
+                Terbuka untuk diskusi penempatan magang industri semester 6, pengembangan aplikasi web/mobile, maupun pertukaran wawasan seputar teknologi analitis.
+              </p>
+            </div>
+          </Reveal>
 
-          {/* Left Block: Direct Mail & Channels (Cols 1-6) */}
-          <div className="col-span-12 lg:col-span-6 space-y-8 pr-0 lg:pr-8 border-b lg:border-b-0 lg:border-r border-[#DDD9CD] pb-12 lg:pb-0">
-            <Reveal animation="fade-right" delay={100}>
-              <div>
-                <span className="font-mono-swiss text-xs text-[#D84227] tracking-[0.1em] block mb-2">
-                  SALURAN TERBUKA // RESPONS 24 JAM
-                </span>
-                <h2 className="font-display text-4xl sm:text-5xl font-extrabold text-[#121212] tracking-[-0.035em] leading-[1.05] mb-6">
-                  Mari Terhubung dan Berkolaborasi.
-                </h2>
-                <p className="font-body text-base text-[#585752] leading-relaxed max-w-lg mb-8">
-                  Terbuka untuk diskusi penempatan magang industri semester 6, pengembangan aplikasi web/mobile, maupun pertukaran wawasan seputar teknologi analitis.
-                </p>
-              </div>
-
-              {/* Massive Interactive Mail Link */}
-              <div className="border-t border-b border-[#DDD9CD] py-6">
-                <span className="font-mono-swiss text-[10px] text-[#87857E] block mb-1">
-                  KIRIM SUREL LANGSUNG:
-                </span>
+          {/* Massive Interactive Mail Link */}
+          <Reveal animation="fade-up" delay={200}>
+            <div className="border border-[#DDD9CD] bg-[#EFECE3] p-8 sm:p-10 text-center">
+              <span className="font-mono-swiss text-[11px] text-[#87857E] tracking-[0.1em] block mb-2">
+                KIRIM SUREL / EMAIL LANGSUNG:
+              </span>
+              <a
+                href={`mailto:${contactData.email}`}
+                className="font-display text-2xl sm:text-4xl md:text-5xl font-extrabold text-[#121212] hover:text-[#D84227] transition-colors break-all inline-block"
+              >
+                {contactData.email}
+              </a>
+              <div className="mt-4">
                 <a
                   href={`mailto:${contactData.email}`}
-                  className="font-display text-2xl sm:text-3xl font-bold text-[#121212] hover:text-[#D84227] transition-colors break-all"
+                  className="font-mono-swiss text-xs tracking-[0.08em] px-6 py-3 bg-[#121212] text-[#F5F3EC] hover:bg-[#D84227] transition-colors inline-flex items-center gap-2"
                 >
-                  {contactData.email}
+                  <span>BUKA APLIKASI EMAIL</span>
+                  <span>→</span>
                 </a>
               </div>
+            </div>
+          </Reveal>
 
-              {/* Channel Links Stack */}
-              <div className="space-y-4 pt-4">
-                <span className="font-mono-swiss text-[10px] text-[#87857E] block">
-                  KANAL KOMUNIKASI RESMI:
-                </span>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {contactLinks.map((item, idx) => (
-                    <a
-                      key={idx}
-                      href={item.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="editorial-row border border-[#DDD9CD] p-4 bg-[#EFECE3] hover:border-[#121212] transition-colors flex items-start justify-between"
-                    >
-                      <div>
-                        <p className="font-mono-swiss text-[10px] text-[#87857E]">
-                          {item.name}
-                        </p>
-                        <p className="font-body text-xs font-semibold text-[#121212] mt-0.5 truncate max-w-[170px]">
-                          {item.value}
-                        </p>
-                      </div>
-                      <div className="text-[#121212] mt-0.5">
+          {/* Channel Links Stack */}
+          <Reveal animation="fade-up" delay={300}>
+            <div className="space-y-3">
+              <span className="font-mono-swiss text-[11px] text-[#87857E] tracking-[0.08em] block text-center">
+                KANAL KOMUNIKASI &amp; PROFIL RESMI:
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {contactLinks.map((item, idx) => (
+                  <a
+                    key={idx}
+                    href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="editorial-row border border-[#DDD9CD] p-5 bg-[#EFECE3] hover:border-[#121212] hover:bg-[#F5F3EC] transition-all flex flex-col justify-between group"
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="font-mono-swiss text-[10px] text-[#87857E]">
+                        {item.name}
+                      </span>
+                      <div className="text-[#121212] group-hover:text-[#D84227] transition-colors">
                         {item.icon}
                       </div>
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              {/* Academic Office Base */}
-              <div className="border-t border-[#DDD9CD] pt-4 font-mono-swiss text-[11px] text-[#585752] space-y-1">
-                <p className="font-semibold text-[#121212]">LOKASI INSTITUSI:</p>
-                <p>Jurusan Teknologi Informasi — Politeknik Negeri Malang</p>
-                <p className="text-[#87857E]">Jl. Soekarno Hatta No.9, Jatimulyo, Lowokwaru, Malang, Jawa Timur</p>
-              </div>
-            </Reveal>
-          </div>
-
-          {/* Right Block: Minimal Single-Line Underline Input Form (Cols 7-12) */}
-          <div className="col-span-12 lg:col-span-6 pl-0 lg:pl-6 space-y-6">
-            <Reveal animation="fade-left" delay={200}>
-              <div>
-                <span className="font-mono-swiss text-xs text-[#D84227] tracking-[0.1em] block mb-2">
-                  TRANSMISI PESAN INTERAKTIF
-                </span>
-                <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#121212] mb-3">
-                  Kirimkan Pesan Terstruktur.
-                </h3>
-                <p className="font-body text-sm text-[#585752] leading-relaxed">
-                  Formulir ini memformat pesan Anda secara otomatis dan membuka obrolan langsung via WhatsApp ke nomor saya.
-                </p>
-              </div>
-
-              {submitted ? (
-                <div className="border border-[#2E6930] bg-[#EFECE3] p-8 text-[#2E6930]">
-                  <p className="font-mono-swiss text-xs font-semibold tracking-[0.08em] mb-2">
-                    STATUS // BERHASIL DITERUSKAN
-                  </p>
-                  <p className="font-body text-sm text-[#121212]">
-                    WhatsApp obrolan telah dibuka. Terima kasih telah menghubungi!
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-8 pt-4">
-                  {/* Single-Line Underline Inputs */}
-                  <div className="space-y-6">
-                    <div>
-                      <label className="block font-mono-swiss text-[10px] text-[#87857E] mb-2">
-                        NAMA LENGKAP PENGIRIM *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="e.g. Nama Anda atau Instansi"
-                        className="underline-input w-full py-2 font-mono-swiss text-xs placeholder:text-[#87857E]/50"
-                      />
                     </div>
+                    <p className="font-body text-sm font-semibold text-[#121212] truncate group-hover:text-[#D84227] transition-colors">
+                      {item.value}
+                    </p>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </Reveal>
 
-                    <div>
-                      <label className="block font-mono-swiss text-[10px] text-[#87857E] mb-2">
-                        ALAMAT SUREL / EMAIL *
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="e.g. nama@perusahaan.com"
-                        className="underline-input w-full py-2 font-mono-swiss text-xs placeholder:text-[#87857E]/50"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block font-mono-swiss text-[10px] text-[#87857E] mb-2">
-                        PESAN ATAU SPESIFIKASI PELUANG MAGANG *
-                      </label>
-                      <textarea
-                        rows={4}
-                        required
-                        value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        placeholder="Ceritakan proyek, topik kolaborasi, atau kriteria magang semester 6..."
-                        className="underline-input w-full py-2 font-mono-swiss text-xs placeholder:text-[#87857E]/50 resize-y"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Inline Submission Action */}
-                  <div className="pt-2">
-                    <button
-                      type="submit"
-                      className="font-mono-swiss text-xs tracking-[0.08em] font-semibold px-8 py-4 bg-[#121212] text-[#F5F3EC] hover:bg-[#D84227] transition-colors flex items-center gap-3 cursor-pointer"
-                    >
-                      <span>KIRIM VIA WHATSAPP</span>
-                      <IconArrowRight className="w-4 h-4" />
-                    </button>
-                  </div>
-                </form>
-              )}
-            </Reveal>
-          </div>
-
+          {/* Academic Office Base */}
+          <Reveal animation="fade-up" delay={400}>
+            <div className="border-t border-[#DDD9CD] pt-6 font-mono-swiss text-[11px] text-[#585752] text-center space-y-1">
+              <p className="font-semibold text-[#121212]">LOKASI INSTITUSI AKADEMIK:</p>
+              <p>Jurusan Teknologi Informasi — Politeknik Negeri Malang</p>
+              <p className="text-[#87857E]">Jl. Soekarno Hatta No.9, Jatimulyo, Lowokwaru, Malang, Jawa Timur</p>
+            </div>
+          </Reveal>
         </div>
 
       </div>
@@ -246,7 +146,7 @@ export default function Contact() {
             GRID SPEC: C12:R∞ // 0PX RADIUS
           </div>
           <div className="sm:text-right text-[#87857E]">
-            SET IN FRAUNCES, INTER &amp; IBM PLEX MONO
+            SET IN PLUS JAKARTA SANS, INTER &amp; IBM PLEX MONO
           </div>
         </div>
       </footer>

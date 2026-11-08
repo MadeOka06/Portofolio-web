@@ -24,7 +24,7 @@ export default function Experience() {
           <div className="grid grid-cols-12 gap-8 mb-16">
             <div className="col-span-12 lg:col-span-5">
               <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#121212] tracking-[-0.03em] leading-tight">
-                Kepemimpinan &amp; Advokasi Institusional.
+                PENGALAMAN ORGANISASI
               </h2>
             </div>
             <div className="col-span-12 lg:col-span-7 flex flex-col justify-end">
