@@ -153,7 +153,7 @@ export const projectsData: ProjectItem[] = [
     gradient: 'from-blue-500/10 via-sky-500/5 to-transparent',
     accentColor: 'text-blue-600',
     demoUrl: '#',
-    githubUrl: 'https://github.com',
+    githubUrl: 'https://github.com/MadeOka06/PBL_Kelompok_3/tree/main/PBL_Kelompok_03',
   },
   {
     id: 2,
@@ -173,7 +173,7 @@ export const projectsData: ProjectItem[] = [
     gradient: 'from-emerald-500/10 via-teal-500/5 to-transparent',
     accentColor: 'text-emerald-600',
     demoUrl: '#',
-    githubUrl: 'https://github.com',
+    githubUrl: 'https://github.com/iqbaal24/web-profile-lab-BA',
   },
 ];
 

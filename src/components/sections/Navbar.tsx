@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { IconMenu, IconX } from '../common/Icons';
+import { Logo } from '../common/Logo';
 import { profileData } from '../../data/portfolioData';
 
 const navLinks = [
@@ -54,9 +55,15 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           <a
             href="#beranda"
-            className="font-mono-swiss text-xs sm:text-sm font-semibold tracking-[0.1em] text-[#121212] hover:opacity-70 transition-opacity"
+            className="flex items-center gap-2.5 group transition-opacity hover:opacity-80"
+            aria-label="Beranda"
           >
-            {profileData.shortname.toUpperCase()}
+            <div className="transition-transform duration-300 group-hover:scale-105">
+              <Logo size={28} />
+            </div>
+            <span className="font-mono-swiss text-xs sm:text-sm font-semibold tracking-[0.1em] text-[#121212]">
+              {profileData.shortname.toUpperCase()}
+            </span>
           </a>
 
         </div>
@@ -143,3 +150,4 @@ export default function Navbar() {
     </header>
   );
 }
+
